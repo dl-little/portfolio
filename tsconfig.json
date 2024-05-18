@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+        "jsx": "react-jsx",
+		"target": "es5",
+		"module": "es2020",
+		"moduleResolution": "node",
+		"baseUrl": "./",
+		"strict": true,
+		"skipLibCheck": true,
+		"noImplicitAny": true,
+		"types": ["vite/client"]
+	},
+	"include": ["resources/js/**/*"]
+}
