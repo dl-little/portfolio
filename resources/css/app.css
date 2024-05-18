@@ -1,3 +1,93 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--dll-tertiary-color, #EEEBD0);
+}
+
+main {
+  padding: 0 0.9em;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-size: 1.125rem;
+}
+
+p {
+  font-size: 1em;
+}
+
+big {
+  font-size: 2.29em;
+}
+
+small {
+  font-size: 0.87em;
+}
+
+h1, h1 > a {
+  font-size: 2em;
+  color: var(--dll-primary-color, #FF5F1F);
+  transition: all 0.2s ease-in-out;
+}
+h1 > a:hover, h1 > a:focus, h1 > a:focus-within, h1 > a > a:hover, h1 > a > a:focus, h1 > a > a:focus-within {
+  color: var(--dll-secondary-color, #E87EA1);
+}
+
+h2, h2 > a {
+  font-size: 1.74em;
+  color: var(--dll-primary-color, #FF5F1F);
+  transition: all 0.2s ease-in-out;
+}
+h2 > a:hover, h2 > a:focus, h2 > a:focus-within, h2 > a > a:hover, h2 > a > a:focus, h2 > a > a:focus-within {
+  color: var(--dll-secondary-color, #E87EA1);
+}
+
+h3, h3 > a {
+  font-size: 1.52em;
+  color: var(--dll-primary-color, #FF5F1F);
+  transition: all 0.2s ease-in-out;
+}
+h3 > a:hover, h3 > a:focus, h3 > a:focus-within, h3 > a > a:hover, h3 > a > a:focus, h3 > a > a:focus-within {
+  color: var(--dll-secondary-color, #E87EA1);
+}
+
+h4, h4 > a {
+  font-size: 1.32em;
+  color: var(--dll-primary-color, #FF5F1F);
+  transition: all 0.2s ease-in-out;
+}
+h4 > a:hover, h4 > a:focus, h4 > a:focus-within, h4 > a > a:hover, h4 > a > a:focus, h4 > a > a:focus-within {
+  color: var(--dll-secondary-color, #E87EA1);
+}
+
+h5, h5 > a {
+  font-size: 1.15em;
+  color: var(--dll-primary-color, #FF5F1F);
+  transition: all 0.2s ease-in-out;
+}
+h5 > a:hover, h5 > a:focus, h5 > a:focus-within, h5 > a > a:hover, h5 > a > a:focus, h5 > a > a:focus-within {
+  color: var(--dll-secondary-color, #E87EA1);
+}
+
+h6, h6 > a {
+  font-size: 1em;
+  color: var(--dll-primary-color, #FF5F1F);
+  transition: all 0.2s ease-in-out;
+}
+h6 > a:hover, h6 > a:focus, h6 > a:focus-within, h6 > a > a:hover, h6 > a > a:focus, h6 > a > a:focus-within {
+  color: var(--dll-secondary-color, #E87EA1);
+}
+
+/*# sourceMappingURL=app.css.map */
