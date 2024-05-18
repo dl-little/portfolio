@@ -1,0 +1,10 @@
+@import 'variables';
+
+:export {
+	gap: $gap;
+	largeGap: $large-gap;
+	doubleGap: $double-gap;
+	halfGap: $half-gap;
+	buttonPadding: $button-padding;
+	largeButtonPadding: $large-button-padding;
+}
