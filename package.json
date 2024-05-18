@@ -4,13 +4,12 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "watch:scss": "sass --watch ./resources/css/scss/app.scss ./resources/css/app.css",
-        "build:scss": "sass ./resources/css/scss/app.scss ./resources/css/app.css"
+        "watch:scss": "sass --watch ./resources/scss/app.scss ./resources/css/app.css",
+        "build:scss": "sass ./resources/css/app.scss ./resources/css/app.css"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
         "@inertiajs/react": "^1.0.0",
-        "@tailwindcss/forms": "^0.5.3",
         "@types/react": "^18.3.2",
         "@types/react-dom": "^18.3.0",
         "@vitejs/plugin-react": "^4.2.0",
@@ -18,8 +17,13 @@
         "laravel-vite-plugin": "^1.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "sass": "^1.77.2",
         "ts-loader": "^9.5.1",
         "typescript": "^5.4.5",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "classnames": "^2.5.1",
+        "styled-components": "^6.1.11"
     }
 }
