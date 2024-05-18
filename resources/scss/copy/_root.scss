@@ -1,0 +1,22 @@
+@import '../abstracts/colors';
+
+html {
+	font-size: 100%;
+}
+
+body {
+	font-size: 1.125rem;
+	color: $contrast;
+}
+
+p {
+	font-size: 1em;
+}
+
+big {
+	font-size: 2.29em;
+}
+
+small {
+	font-size: 0.87em;
+}

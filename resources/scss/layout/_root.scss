@@ -1,0 +1,20 @@
+@import '../abstracts';
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+	& > *:not(:first-child) {
+		margin-block-start: $gap;
+	}
+}
+
+.group {
+	padding: 0 $gap;
+}
