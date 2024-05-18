@@ -1,5 +1,0 @@
-@mixin hovered {
-	&:hover, &:focus, &:focus-within {
-		@content;
-	}
-}
