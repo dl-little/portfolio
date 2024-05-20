@@ -11,12 +11,12 @@ const StyledHeader = styled.header`
 	background-color: ${darkBlue};
 `;
 
-const Header: React.FC<IHeader> = ({ title }) => {
+const Header: React.FC<IHeader> = () => {
 	return (
 		<StyledHeader>
 			<div id="header-wrap" className="group">
 				<Logo />
-				<h1>{title}</h1>
+				<h1 className="screen-reader-text">Doug Little</h1>
 			</div>
 		</StyledHeader>
 	)

@@ -13,6 +13,8 @@ main > *:not(:first-child) {
 }
 
 .group {
+  max-width: 80em;
+  margin: 0 auto;
   padding: 0 0.9em;
 }
 
@@ -23,9 +25,10 @@ main > *:not(:first-child) {
 }
 #header-wrap #logo-wrap {
   height: 0;
-  width: 90px;
-  padding-top: 75px;
+  width: 82px;
+  padding-top: 68px;
   position: relative;
+  filter: contrast(200%);
 }
 #header-wrap #logo-wrap svg {
   position: absolute;
@@ -64,6 +67,17 @@ big {
 
 small {
   font-size: 0.87em;
+}
+
+.screen-reader-text {
+  border: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  width: 1px !important;
 }
 
 h1, h1 > a {

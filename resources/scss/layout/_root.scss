@@ -16,5 +16,7 @@ main {
 }
 
 .group {
+	max-width: $pageWidth;
+	margin: 0 auto;
 	padding: 0 $gap;
 }
