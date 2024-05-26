@@ -64,6 +64,9 @@
   width: 0;
   height: 0;
 }
+#app main article > *:last-child {
+  margin-bottom: 1.8em;
+}
 #app footer {
   font-size: 0.5em;
   position: fixed;
@@ -90,6 +93,9 @@
   #app main article {
     padding: 1.35em 1.35em 1.35em calc(1.35em + 0.9em + 80px);
   }
+  #app main article > *:last-child {
+    margin-bottom: 2.7em;
+  }
   #app footer {
     bottom: 1.75em;
     right: 1.55em;
@@ -111,6 +117,9 @@
   }
   #app main article {
     padding: 1.8em 1.8em 1.8em calc(1.8em + 0.9em + 80px);
+  }
+  #app main article > *:last-child {
+    margin-bottom: 3.6em;
   }
   #app footer {
     bottom: 2.2em;
