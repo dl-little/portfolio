@@ -1,9 +1,11 @@
-import styled from 'styled-components';
-import colors from '../../scss/abstracts/_palette.module.scss';
-const { tertiary } = colors;
+import { PropsWithChildren } from 'react';
 
-const Main = styled.main`
-	background: ${tertiary};
-`
+const Main: React.FC<PropsWithChildren> = ({children}) => {
+	return (
+		<main>
+			{children}
+		</main>
+	)
+}
 
 export default Main;

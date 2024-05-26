@@ -12,13 +12,13 @@ const Layout: React.FC<ILayout> = ({ children, title }) => {
 	return (
 		<>
 			<Head title={title} />
+			<Header />
 			<Main>
-				<Header title={title} />
-				<article className="group">
+				<article>
 					{children}
 				</article>
-				<Footer />
 			</Main>
+			<Footer />
 		</>
 	)
 }

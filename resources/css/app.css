@@ -3,13 +3,119 @@
   padding: 0;
 }
 
-main {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+#app {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  background-color: #FAF9F0;
+  overflow: hidden;
+  font-family: "Verdana";
 }
-main > *:not(:first-child) {
-  margin-block-start: 0.9em;
+#app::before {
+  position: absolute;
+  content: "";
+  border: 0.2em solid #1F2933;
+  width: calc(100% - 1.2em);
+  height: calc(100% - 1.2em);
+  left: 0.45em;
+  top: 0.45em;
+  z-index: 1;
+}
+#app header {
+  position: fixed;
+  top: 0.9em;
+  left: 0.9em;
+}
+#app header #header-wrap #logo {
+  object-fit: contain;
+}
+#app main {
+  position: relative;
+  height: 100%;
+}
+#app main::before, #app main::after {
+  height: 0.45em;
+}
+#app main::before, #app main::after {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  content: "";
+  z-index: 2;
+  background-color: rgba(250, 249, 240, 0.8);
+  backdrop-filter: blur(0.1em);
+}
+#app main::before {
+  top: 0;
+}
+#app main::after {
+  bottom: 0;
+}
+#app main article {
+  z-index: 1;
+  position: relative;
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  padding: 0.9em 0.9em 0.9em calc(0.9em + 0.9em + 80px);
+}
+#app main article::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+#app footer {
+  font-size: 0.5em;
+  position: fixed;
+  writing-mode: vertical-rl;
+  bottom: 1.3em;
+  right: 1.1em;
+  color: #1F2933;
+  font-weight: 700;
+}
+@media (min-width: 421px) {
+  #app::before {
+    width: calc(100% - 1.65em);
+    height: calc(100% - 1.65em);
+    left: 0.675em;
+    top: 0.675em;
+  }
+  #app header {
+    top: 1.35em;
+    left: 1.35em;
+  }
+  #app main::before, #app main::after {
+    height: 0.675em;
+  }
+  #app main article {
+    padding: 1.35em 1.35em 1.35em calc(1.35em + 0.9em + 80px);
+  }
+  #app footer {
+    bottom: 1.75em;
+    right: 1.55em;
+  }
+}
+@media (min-width: 768px) {
+  #app::before {
+    width: calc(100% - 2.1em);
+    height: calc(100% - 2.1em);
+    left: 0.9em;
+    top: 0.9em;
+  }
+  #app header {
+    top: 1.8em;
+    left: 1.8em;
+  }
+  #app main::before, #app main::after {
+    height: 0.9em;
+  }
+  #app main article {
+    padding: 1.8em 1.8em 1.8em calc(1.8em + 0.9em + 80px);
+  }
+  #app footer {
+    bottom: 2.2em;
+    right: 2em;
+  }
 }
 
 .group {
@@ -18,34 +124,13 @@ main > *:not(:first-child) {
   padding: 0 0.9em;
 }
 
-#header-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-#header-wrap #logo-wrap {
-  height: 0;
-  width: 82px;
-  padding-top: 68px;
-  position: relative;
-  filter: contrast(200%);
-}
-#header-wrap #logo-wrap svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
+header {
+  position: fixed;
   left: 0;
+  top: 0;
 }
-
-article {
-  flex: 1;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+header #header-wrap #logo {
+  object-fit: contain;
 }
 
 html {
@@ -78,6 +163,7 @@ small {
   padding: 0 !important;
   white-space: nowrap !important;
   width: 1px !important;
+  color: #02111B;
 }
 
 h1, h1 > a {

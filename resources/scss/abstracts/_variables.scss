@@ -5,6 +5,7 @@ $gap: 0.9em;
 $large-gap: calc( 1.2 * $gap );
 $double-gap: calc( 2 * $gap );
 $half-gap: calc( $gap / 2 );
+$quarter-gap: calc( $gap / 4 );
 
 $large-button-padding: $half-gap $gap;
 $button-padding: calc( $gap / 3 ) $half-gap;

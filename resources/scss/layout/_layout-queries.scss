@@ -1,0 +1,43 @@
+@include tablet {
+	&::before {
+		@include setFrame( calc( $gap + $half-gap ) );
+	}
+
+	header {
+		@include placeHeader( calc( $gap + $half-gap ) );
+	}
+
+	main {
+		@include setBlur( calc( $gap + $half-gap ) );
+
+		article {
+			@include setArticlePadding( calc( $gap + $half-gap ) );
+		}
+	}
+
+	footer {
+		@include placeFooter( calc( $gap + $half-gap ) );
+	}
+}
+
+@include desktop {
+	&::before {
+		@include setFrame( $double-gap );
+	}
+
+	header {
+		@include placeHeader( $double-gap );
+	}
+
+	main {
+		@include setBlur( $double-gap );
+
+		article {
+			@include setArticlePadding( $double-gap );
+		}
+	}
+
+	footer {
+		@include placeFooter( $double-gap );
+	}
+}

@@ -3,3 +3,30 @@
 		@content;
 	}
 }
+
+@mixin setFrame( $padding ) {
+	width: calc(100% - calc( $padding + .3em ) );
+	height: calc(100% - calc( $padding + .3em ) );
+	left: calc( $padding / 2 );
+	top: calc( $padding / 2 );
+}
+
+@mixin placeFooter( $padding ) {
+	bottom: calc( $padding + .4em );
+	right: calc( $padding + .2em );
+}
+
+@mixin placeHeader( $padding ) {
+	top: $padding;
+	left: $padding;
+}
+
+@mixin setArticlePadding( $padding ) {
+	padding: $padding $padding $padding calc( $padding + calc( $gap + 80px ) );
+}
+
+@mixin setBlur( $padding ) {
+	&::before, &::after {
+		height: calc( $padding / 2 );
+	}
+}

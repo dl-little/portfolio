@@ -1,24 +1,13 @@
-import styled from 'styled-components';
 import Logo from './Logo';
-import colors from '../../scss/abstracts/_palette.module.scss';
-const { darkBlue } = colors;
 
-interface IHeader {
-	title: string
-}
-
-const StyledHeader = styled.header`
-	background-color: ${darkBlue};
-`;
-
-const Header: React.FC<IHeader> = () => {
+const Header: React.FC = () => {
 	return (
-		<StyledHeader>
-			<div id="header-wrap" className="group">
+		<header>
+			<div id="header-wrap">
 				<Logo />
 				<h1 className="screen-reader-text">Doug Little</h1>
 			</div>
-		</StyledHeader>
+		</header>
 	)
 }
 
