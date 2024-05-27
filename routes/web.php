@@ -2,11 +2,18 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/projects', [ProjectsController::class, 'index']);
+
+Route::get('/contact', function() {
+    return Inertia::render('Contact');
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

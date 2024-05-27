@@ -1,0 +1,52 @@
+#nav {
+	font-size: .8em;
+
+	#nav-list {
+		list-style-type: none;
+
+		& > .nav-item {
+			position: relative;
+
+			&:not( :first-child ) {
+				margin-block-start: $gap;
+			}
+
+			.dot {
+				position: absolute;
+				color: $secondary;
+				opacity: 0;
+				transition-property: opacity;
+				transition: .2s;
+				transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+			}
+
+			&.active {
+				pointer-events: none;
+				color: $accent;
+
+				.dot {
+					color: $accent;
+					opacity: 1;
+				}
+
+				.nav-link {
+					opacity: 0;
+				}
+			}
+
+			.nav-link {
+				position: relative;
+				color: $dark-blue;
+				font-weight: $bold;
+				transition-property: color;
+				transition: .3s;
+				transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+				text-decoration: none;
+
+				@include hovered {
+					color: $secondary;
+				}
+			}
+		}
+	}
+}

@@ -1,3 +1,59 @@
+header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+}
+header #header-wrap > *:not(:first-child) {
+  margin-block-start: 0.9em;
+}
+header #header-wrap #logo-wrap {
+  display: block;
+}
+header #header-wrap #nav {
+  font-size: 0.8em;
+}
+header #header-wrap #nav #nav-list {
+  list-style-type: none;
+}
+header #header-wrap #nav #nav-list > .nav-item {
+  position: relative;
+}
+header #header-wrap #nav #nav-list > .nav-item:not(:first-child) {
+  margin-block-start: 0.9em;
+}
+header #header-wrap #nav #nav-list > .nav-item .dot {
+  position: absolute;
+  color: #E87EA1;
+  opacity: 0;
+  transition-property: opacity;
+  transition: 0.2s;
+  transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+header #header-wrap #nav #nav-list > .nav-item.active {
+  pointer-events: none;
+  color: #43FFFF;
+}
+header #header-wrap #nav #nav-list > .nav-item.active .dot {
+  color: #43FFFF;
+  opacity: 1;
+}
+header #header-wrap #nav #nav-list > .nav-item.active .nav-link {
+  opacity: 0;
+}
+header #header-wrap #nav #nav-list > .nav-item .nav-link {
+  position: relative;
+  color: #1F2933;
+  font-weight: 700;
+  transition-property: color;
+  transition: 0.3s;
+  transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+  text-decoration: none;
+}
+header #header-wrap #nav #nav-list > .nav-item .nav-link:hover, header #header-wrap #nav #nav-list > .nav-item .nav-link:focus, header #header-wrap #nav #nav-list > .nav-item .nav-link:focus-within {
+  color: #E87EA1;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -127,28 +183,13 @@
   }
 }
 
-.group {
-  max-width: 80em;
-  margin: 0 auto;
-  padding: 0 0.9em;
-}
-
-header {
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-header #header-wrap #logo {
-  object-fit: contain;
-}
-
 html {
   font-size: 100%;
 }
 
 body {
   font-size: 1.125rem;
-  color: #02111B;
+  color: #1F2933;
 }
 
 p {
@@ -172,7 +213,7 @@ small {
   padding: 0 !important;
   white-space: nowrap !important;
   width: 1px !important;
-  color: #02111B;
+  color: #1F2933;
 }
 
 h1, h1 > a {

@@ -1,12 +1,21 @@
+@import '../abstracts';
+
 header {
 	position: fixed;
 	left: 0;
 	top: 0;
+	z-index: 2;
 
 	#header-wrap {
-	
-		#logo {
-			object-fit: contain;
+
+		& > *:not(:first-child) {
+			margin-block-start: $gap;
 		}
+
+		#logo-wrap {
+			display: block;
+		}
+
+		@import './navigation';
 	}
 }
