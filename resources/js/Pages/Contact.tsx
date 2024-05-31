@@ -1,4 +1,5 @@
-import Layout from '../Layouts/Layout';
+import Layout from '@/Layouts/Layout';
+import { PageProps } from '@inertiajs/core';
 
 const Contact = () => {
 	return (
@@ -8,6 +9,10 @@ const Contact = () => {
 	);
 }
 
-Contact.layout = page => <Layout children={page} title="Contact" />
+Contact.layout = (page: PageProps) => {
+	return (
+		<Layout children={page} title="Contact" />
+	)
+}
 
 export default Contact;

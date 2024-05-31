@@ -1,4 +1,5 @@
-import Layout from '../Layouts/Layout';
+import Layout from '@/Layouts/Layout';
+import { PageProps } from '@inertiajs/core';
 
 const Projects = () => {
 	return (
@@ -8,6 +9,10 @@ const Projects = () => {
 	);
 }
 
-Projects.layout = page => <Layout children={page} title="Projects" />
+Projects.layout = (page: PageProps) => {
+	return (
+		<Layout children={page} title="Projects" />
+	)
+}
 
 export default Projects;
