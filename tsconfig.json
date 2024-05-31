@@ -8,7 +8,11 @@
 		"strict": true,
 		"skipLibCheck": true,
 		"noImplicitAny": true,
-		"types": ["vite/client"]
+		"types": ["vite/client"],
+		"paths": {
+			"@/*": ["resources/js/*"],
+			"ziggy-js": ["./vendor/tightenco/ziggy"]
+		}
 	},
 	"include": ["resources/js/**/*"]
 }
