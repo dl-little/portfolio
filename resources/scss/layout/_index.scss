@@ -1,5 +1,6 @@
 @import '../abstracts';
 @import 'header';
+@import 'footer';
 
 * {
 	margin: 0;
@@ -20,17 +21,6 @@
 		border: .2em solid $dark-blue;
 		@include setFrame( $gap );
 		z-index: 1;
-	}
-
-	header {
-		position: fixed;
-		@include placeHeader( $gap );
-	
-		#header-wrap {
-			#logo {
-				object-fit: contain;
-			}
-		}
 	}
 
 	main {
@@ -74,15 +64,6 @@
 				margin-bottom: $double-gap;
 			}
 		}
-	}
-
-	footer {
-		font-size: .5em;
-		position: fixed;
-		writing-mode: vertical-rl;
-		@include placeFooter( $gap );
-		color: $dark-blue;
-		font-weight: $bold;
 	}
 
 	@import './_layout-queries';

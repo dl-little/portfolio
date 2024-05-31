@@ -1,0 +1,16 @@
+@import '../abstracts';
+
+footer {
+	font-size: .5em;
+	position: fixed;
+	writing-mode: vertical-rl;
+	@include placeFooter( $gap );
+	color: $dark-blue;
+	font-weight: $bold;
+	z-index: 2;
+
+	#footer-wrap {
+		display: flex;
+		gap: $gap;
+	}
+}

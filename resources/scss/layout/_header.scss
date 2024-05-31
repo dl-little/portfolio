@@ -5,6 +5,7 @@ header {
 	left: 0;
 	top: 0;
 	z-index: 2;
+	@include placeHeader( $gap );
 
 	#header-wrap {
 
@@ -14,6 +15,10 @@ header {
 
 		#logo-wrap {
 			display: block;
+
+			#logo {
+				object-fit: contain;
+			}
 		}
 
 		@import './navigation';
