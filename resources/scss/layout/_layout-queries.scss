@@ -38,7 +38,7 @@
 		article {
 			@include setArticlePadding( $double-gap );
 			& > *:last-child {
-				margin-bottom: calc( $double-gap * 2 );
+				margin-bottom: $quad-gap;
 			}
 		}
 	}

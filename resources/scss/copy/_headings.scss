@@ -1,4 +1,4 @@
-@import '../abstracts';
+@import '../abstracts/colors';
 
 @mixin fontLevels($level) {
 	@if $level == 1 {

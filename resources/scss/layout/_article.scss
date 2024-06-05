@@ -1,0 +1,41 @@
+article {
+	z-index: 1;
+	position: relative;
+	height: 100%;
+	overflow-y: scroll;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	@include setArticlePadding( $gap );
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	text-align: right;
+	padding-top: var(--scroll-offset) !important;
+
+	&::-webkit-scrollbar { /* WebKit */
+		width: 0;
+		height: 0;
+	}
+
+	& > * {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	& > *:first-child {
+		margin-block-start: var(--scroll-offset);
+	}
+
+	& > *:last-child {
+		margin-bottom: $double-gap;
+	}
+
+	@include tablet {
+		align-items: center;
+	}
+	
+	@include desktop {
+		align-items: flex-end;
+	}
+}
+
