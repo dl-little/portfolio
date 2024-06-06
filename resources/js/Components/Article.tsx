@@ -14,16 +14,23 @@ const Article: React.FC<PropsWithChildren> = ({children}) => {
 			return 0;
 		}
 
-		const bodyHeight = window.document.body.clientHeight;
-		return articleScrollHeight - bodyHeight;
+		const gap = .9 * parseFloat( getComputedStyle( window.document.body ).fontSize );
+		return Math.round((articleScrollHeight + ( gap * 2 )) - articleOffsetHeight );
+	}
+
+	const setBodyAttribute = () => {
+		document.body.setAttribute('style', '');
+		document.body.setAttribute('style', `--scroll-offset: ${getScrollOffset()}px`);
 	}
 
 	useLayoutEffect(() => {
 
-		document.body.setAttribute('style', `--scroll-offset: ${getScrollOffset()}px`);
+		setBodyAttribute();
+		window.addEventListener('resize', setBodyAttribute);
 
 		return () => {
 			document.body.setAttribute('style', '');
+			window.removeEventListener('resize', setBodyAttribute);
 		}
 	}, [children])
 
