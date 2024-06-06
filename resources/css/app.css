@@ -149,7 +149,7 @@ footer #footer-wrap {
   margin-block-start: var(--scroll-offset);
 }
 #app main article > *:last-child {
-  margin-bottom: 1.8em;
+  margin-bottom: calc(1.8em + var(--scroll-offset, 0em));
 }
 @media (min-width: 421px) {
   #app main article {
@@ -179,7 +179,7 @@ footer #footer-wrap {
     padding: 1.35em 1.35em 1.35em calc(1.35em + 0.9em + 80px);
   }
   #app main article > *:last-child {
-    margin-bottom: 2.7em;
+    margin-bottom: calc(2.7em + var(--scroll-offset, 0em));
   }
   #app footer {
     bottom: 1.75em;
@@ -204,7 +204,7 @@ footer #footer-wrap {
     padding: 1.8em 1.8em 1.8em calc(1.8em + 0.9em + 80px);
   }
   #app main article > *:last-child {
-    margin-bottom: 3.6em;
+    margin-bottom: calc(3.6em + var(--scroll-offset, 0em));
   }
   #app footer {
     bottom: 2.2em;

@@ -27,7 +27,7 @@ article {
 	}
 
 	& > *:last-child {
-		margin-bottom: $double-gap;
+		margin-bottom: calc( $double-gap + var(--scroll-offset, 0em) );
 	}
 
 	@include tablet {
