@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'queries';
 
 :export {
 	gap: $gap;
@@ -9,4 +10,6 @@
 	largeButtonPadding: $large-button-padding;
 	quarterGap: $quarter-gap;
 	quadGap: $quad-gap;
+	desktopBreak: $desktop-break;
+	tabletBreak: $tablet-break;
 }

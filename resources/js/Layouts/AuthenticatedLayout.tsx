@@ -1,9 +1,9 @@
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import styled from 'styled-components';
 import RenderIf from '@/Components/RenderIf';
-
+import { ILayout } from './Layout';
 import variables from '../../scss/abstracts/_shared.module.scss';
-const { gap } = variables;
+const { gap, halfGap, doubleGap, desktopBreak, tabletBreak } = variables;
 
 const Nav = styled.nav`
     display: flex;
@@ -11,26 +11,38 @@ const Nav = styled.nav`
     justify-content: flex-end;
     align-items: flex-start;
     gap: ${gap};
-`;
+    padding-left: calc(${doubleGap} + 80px);
+    padding-top: calc( ${gap} + ${halfGap} );
 
-const UserDetails = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-    gap: ${gap}
+    @media( min-width: ${tabletBreak} ) {
+        position: fixed;
+        right: calc( ${gap} + ${halfGap} );
+        top: calc( ${gap} + ${halfGap} );
+        padding-left: calc( ${doubleGap} + ${halfGap} + 80px );
+        padding-top: 0;
+    }
+
+    @media( min-width: ${desktopBreak} ) {
+        right: ${doubleGap};
+        top: ${doubleGap};
+        padding-left: calc( ${doubleGap} + ${gap} + 80px );
+    }
 `;
 
 const Children = styled.section`
     flex: 1;
-    margin-block-start: ${gap};
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: flex-start;
-    gap: ${gap};
-    text-align: left;
+    margin-block-start: ${doubleGap};
+
+    @media( min-width: ${tabletBreak} ) {
+        margin-block-start: calc( ${doubleGap} + calc( ${gap} + ${halfGap} ) );
+    }
+
+    @media( min-width: ${desktopBreak} ) {
+        margin-block-start: calc( ${doubleGap} + ${doubleGap} );
+    }
 `;
 
-export default function Authenticated({ user, title, children }) {
+const Authenticated: React.FC<ILayout> = ({ user, title, children }) => {
 
     return (
         <>
@@ -40,10 +52,10 @@ export default function Authenticated({ user, title, children }) {
                 </ResponsiveNavLink>
                 <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
 
-                <UserDetails>
-                    <div className="font-medium text-base text-gray-800">{user.name}</div>
-                    <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                </UserDetails>
+                <RenderIf isTrue={!!user}>
+                        {/* @ts-ignore:next-line: Block won't render unless user is defined */}
+                        <div className="font-medium text-base text-gray-800">{user.name}</div>
+                </RenderIf>
         
                 <ResponsiveNavLink method="post" href={route('logout')} as="button">
                     Log Out
@@ -61,3 +73,5 @@ export default function Authenticated({ user, title, children }) {
         </>
     );
 }
+
+export default Authenticated;

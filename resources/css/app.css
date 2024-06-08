@@ -143,23 +143,12 @@ footer #footer-wrap {
 }
 #app main article > * {
   max-width: 100%;
-  width: 100%;
 }
 #app main article > *:first-child {
   margin-block-start: var(--scroll-offset);
 }
 #app main article > *:last-child {
   margin-bottom: calc(1.8em + var(--scroll-offset, 0em));
-}
-@media (min-width: 421px) {
-  #app main article {
-    align-items: center;
-  }
-}
-@media (min-width: 768px) {
-  #app main article {
-    align-items: flex-end;
-  }
 }
 @media (min-width: 421px) {
   #app::before {

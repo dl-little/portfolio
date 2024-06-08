@@ -19,7 +19,6 @@ article {
 
 	& > * {
 		max-width: 100%;
-		width: 100%;
 	}
 
 	& > *:first-child {
@@ -29,13 +28,4 @@ article {
 	& > *:last-child {
 		margin-bottom: calc( $double-gap + var(--scroll-offset, 0em) );
 	}
-
-	@include tablet {
-		align-items: center;
-	}
-	
-	@include desktop {
-		align-items: flex-end;
-	}
 }
-
