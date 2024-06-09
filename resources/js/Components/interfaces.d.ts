@@ -16,3 +16,13 @@ export interface ISharedProps extends PageProps {
 declare global {
 	var route: typeof routeFn;
 }
+
+export interface IAuthenticatedPage extends PageProps {
+	auth: {
+		user: {
+			id: number,
+			name: string,
+			email: string
+		}
+	},
+}
