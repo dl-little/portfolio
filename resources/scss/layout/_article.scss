@@ -9,7 +9,7 @@ article {
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
-	text-align: right;
+	// text-align: right;
 	padding-top: var(--scroll-offset) !important;
 
 	&::-webkit-scrollbar { /* WebKit */

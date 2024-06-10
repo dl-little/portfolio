@@ -27,9 +27,7 @@ const Authenticated: React.FC<ILayout> = ({ user, title, children }) => {
                 <RenderIf isTrue={!!title}>
                     <h2 className="screen-reader-text">{title}</h2>
                 </RenderIf>
-                <div>
-                    {children}
-                </div>
+                {children}
             </Children>
         </>
     );
