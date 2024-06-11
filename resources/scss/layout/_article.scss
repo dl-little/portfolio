@@ -9,7 +9,8 @@ article {
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
-	// text-align: right;
+	align-items: flex-end;
+	text-align: right;
 	padding-top: var(--scroll-offset) !important;
 
 	&::-webkit-scrollbar { /* WebKit */
@@ -19,6 +20,15 @@ article {
 
 	& > * {
 		max-width: 100%;
+		padding-right: 0;
+
+		@include tablet {
+			padding-right: 10%;
+		}
+
+		@include desktop {
+			padding-right: 20%;
+		}
 	}
 
 	& > *:first-child {
@@ -26,6 +36,10 @@ article {
 	}
 
 	& > *:last-child {
-		margin-bottom: calc( $double-gap + var(--scroll-offset, 0em) );
+		margin-block-end: calc( $double-gap + var(--scroll-offset, 0em) );
+	}
+
+	& > *:not(:first-child) {
+		margin-block-start: .9rem;
 	}
 }

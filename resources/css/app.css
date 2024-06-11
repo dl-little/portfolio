@@ -36,7 +36,7 @@ header#header #header-wrap #nav #nav-list > .nav-item .dot {
   color: #E87EA1;
   opacity: 0;
   transition-property: opacity;
-  transition: 0.2s;
+  transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 }
 header#header #header-wrap #nav #nav-list > .nav-item.active {
@@ -55,7 +55,7 @@ header#header #header-wrap #nav #nav-list > .nav-item .nav-link {
   color: #1F2933;
   font-weight: 700;
   transition-property: color;
-  transition: 0.3s;
+  transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   text-decoration: none;
 }
@@ -68,7 +68,7 @@ footer {
   position: fixed;
   writing-mode: vertical-rl;
   bottom: 1.3em;
-  right: 1.1em;
+  right: 1.3em;
   color: #1F2933;
   font-weight: 700;
   z-index: 2;
@@ -89,7 +89,7 @@ footer #footer-wrap {
   box-sizing: border-box;
   background-color: #FAF9F0;
   overflow: hidden;
-  font-family: "Verdana";
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 #app::before {
   position: absolute;
@@ -134,6 +134,8 @@ footer #footer-wrap {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+  align-items: flex-end;
+  text-align: right;
   padding-top: var(--scroll-offset) !important;
 }
 #app main article::-webkit-scrollbar { /* WebKit */
@@ -142,12 +144,26 @@ footer #footer-wrap {
 }
 #app main article > * {
   max-width: 100%;
+  padding-right: 0;
+}
+@media (min-width: 421px) {
+  #app main article > * {
+    padding-right: 10%;
+  }
+}
+@media (min-width: 768px) {
+  #app main article > * {
+    padding-right: 20%;
+  }
 }
 #app main article > *:first-child {
   margin-block-start: var(--scroll-offset);
 }
 #app main article > *:last-child {
-  margin-bottom: calc(1.8em + var(--scroll-offset, 0em));
+  margin-block-end: calc(1.8em + var(--scroll-offset, 0em));
+}
+#app main article > *:not(:first-child) {
+  margin-block-start: 0.9rem;
 }
 @media (min-width: 421px) {
   #app::before {
@@ -171,7 +187,7 @@ footer #footer-wrap {
   }
   #app footer {
     bottom: 1.75em;
-    right: 1.55em;
+    right: 1.75em;
   }
 }
 @media (min-width: 768px) {
@@ -196,7 +212,7 @@ footer #footer-wrap {
   }
   #app footer {
     bottom: 2.2em;
-    right: 2em;
+    right: 2.2em;
   }
 }
 
@@ -214,13 +230,32 @@ p {
 }
 
 big {
-  font-size: 2.29em;
+  font-size: 2em;
+  color: #1F2933;
+}
+@media (min-width: 421px) {
+  big {
+    font-size: 2.79em;
+  }
 }
 
 small {
-  font-size: 0.87em;
+  font-size: 0.9em;
 }
 
+.emphasis.box {
+  outline-width: 0.1em;
+  outline-style: solid;
+  padding: 0.1em;
+}
+.emphasis.box.primary {
+  outline-color: transparent;
+}
+@media (min-width: 421px) {
+  .emphasis.box.primary {
+    outline-color: #FF9F1C;
+  }
+}
 .screen-reader-text {
   border: 0 !important;
   clip: rect(0, 0, 0, 0) !important;

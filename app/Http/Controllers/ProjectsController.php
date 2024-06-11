@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Http\Resources\ProjectResource;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectsController extends Controller
 {
@@ -21,6 +22,7 @@ class ProjectsController extends Controller
         $projects = ProjectResource::collection( Project::all() );
         return Inertia::render('Projects/Index', compact('projects'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,6 +31,18 @@ class ProjectsController extends Controller
     public function create(): Response
     {
         return Inertia::render('Projects/Create');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param Project $project
+     *
+     * @return \Inertia\Response
+     */
+    public function edit(Project $project): Response
+    {
+        return Inertia::render('Projects/Edit', compact('project'));
     }
 
     /**
@@ -62,6 +76,50 @@ class ProjectsController extends Controller
             'description' => $request->description,
         ]);
  
-        return redirect(route('projects.index'));
+        return redirect(route('projects.index'))->with('message', 'Project created.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Project $project
+     */
+    public function update(Request $request, Project $project): RedirectResponse
+    {
+
+        $request->validate([
+            'title' => 'required|min:3'
+        ]);
+
+        $image = $project->image;
+
+        if ( $request->hasFile('image') ) {
+            Storage::delete($image);
+            $image = $request->file('image')->store('projects');
+        }
+
+        $project->update([
+            'title' => $request->title,
+            'image' => $image,
+            'keywords' => $request->keywords,
+            'description' => $request->description,
+            'github_url' => $request->github_url
+        ]);
+
+        return redirect(route('projects.index'))->with('message', 'Project updated.');
+    }
+
+    /**
+     * Delete the project
+     *
+     * @param Project $project
+     */
+    public function destroy(Project $project): RedirectResponse
+    {
+        Storage::delete($project->image);
+        $project->delete();
+
+        return back()->with('message', 'Project deleted.');
     }
 }

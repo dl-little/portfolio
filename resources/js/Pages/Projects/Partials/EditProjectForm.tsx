@@ -1,10 +1,12 @@
 import { ChangeEvent } from 'react';
 import { useForm } from '@inertiajs/react';
+import { FormDataConvertible, Inertia } from '@inertiajs/inertia';
 import InputError from '@/Components/InputError';
 import FormGroup from '@/Components/FormGroup';
 import styled from 'styled-components';
 import variables from '../../../../scss/abstracts/_shared.module.scss'
 import RenderIf from '@/Components/RenderIf';
+import { IProject } from '../Index';
 const { gap } = variables;
 
 const Form = styled.form`
@@ -14,13 +16,14 @@ const Form = styled.form`
 	gap: ${gap};
 `;
 
-const CreateProjectForm = () => {
-	const { data, setData, post, processing, errors, progress }= useForm({
-		title: '',
+const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
+	const { description, github_url, id, image, keywords, title } = project;
+	const { data, setData, errors, progress }= useForm({
+		title: title,
 		image: undefined,
-		github_url: '',
-		keywords: '',
-		description: ''
+		github_url: github_url || '',
+		keywords: keywords || '',
+		description: description || ''
 	});
 
 	const handleFileUpload = ((e: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +46,14 @@ const CreateProjectForm = () => {
 
 	const handleSubmit = ((e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		post(route('projects.store'));
+		Inertia.post(`/projects/${id}`, {
+			_method: "put",
+			title: data.title,
+			image: data.image || '',
+			github_url: data.github_url,
+			keywords: data.keywords,
+			description: data.description
+		});
 	});
 
 	return (
@@ -78,9 +88,9 @@ const CreateProjectForm = () => {
 				<textarea id="description" value={data.description} onChange={handleInputChange} />
 				<InputError message={errors.description} />
 			</FormGroup>
-			<button type="submit">Store</button>
+			<button type="submit">Update</button>
 		</Form>
 	)
 }
 
-export default CreateProjectForm;
+export default EditProjectForm;

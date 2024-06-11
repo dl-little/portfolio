@@ -3,7 +3,7 @@ import { IAuthenticatedPage } from '@/Components/interfaces';
 import { Link } from '@inertiajs/react';
 import styled from 'styled-components';
 
-interface IProject {
+export interface IProject {
     description?: string
     github_url?: string
     id: number

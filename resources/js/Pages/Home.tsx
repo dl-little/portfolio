@@ -1,12 +1,93 @@
+import { useEffect, useRef, useState, useCallback } from "react";
+import styled from "styled-components";
+import variables from '../../scss/abstracts/_shared.module.scss'
+const { gap } = variables;
+import classNames from 'classnames';
+
+const HomeContainer = styled.section`
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-end;
+
+	& > *:not(:first-child):not(big) {
+		margin-block-start: .9rem;
+	}
+
+	& > * {
+		display: block;
+	}
+`
+
+const Marquee = styled.section`
+	display: flex;
+	flex-flow: row wrap;
+	gap: .2em;
+	align-items: flex-start;
+	overflow: hidden;
+	padding: .2em;
+`;
+
+const Rotating = styled.span`
+	display: flex;
+	flex-flow: column nowrap;
+	align-self: flex-start;
+	text-align: left;
+`;
+
+const RotatingTitle = styled.span`
+	margin-top: -.1em;
+	display: none;
+
+	&.active {
+		display: block;
+	}
+`;
+
+const nouns = [
+	'full-stack developer',
+	'former teacher',
+	'React developer',
+	'WordPress developer',
+];
+
 const Home = () => {
+	const [ activeIndex, setActiveIndex ] = useState(0);
+
+	const changeTitle = () => {
+		let randomIndex = Math.floor( Math.random() * nouns.length );
+
+		do {
+			randomIndex = Math.floor( Math.random() * nouns.length );
+		} while ( randomIndex === activeIndex )
+
+		setActiveIndex( randomIndex );
+	}
+
+	useEffect(() => {
+		const interval = setInterval(changeTitle, 3000);
+		return () => {
+			clearInterval(interval);
+		};
+	}, [activeIndex])
 
 	return (
-		<>
-			<p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</p>
-			<p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</p>
-			<p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</p>
-			<p>"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"</p>
-		</>
+		<HomeContainer id="home-container">
+			<small>Hey, I'm Doug!</small>
+			<big>I build <span className="emphasis highlight accent">things</span> on the web.</big>
+			<Marquee>
+				I'm a
+				<Rotating className="emphasis box primary">
+						{nouns.map((noun, index) => {
+							return (
+								<RotatingTitle className={classNames("rotating-noun", {active: index === activeIndex})} key={noun}>
+									{noun}
+								</RotatingTitle>
+							)
+						})}
+				</Rotating>
+				.
+			</Marquee>
+		</HomeContainer>
 	);
 }
 

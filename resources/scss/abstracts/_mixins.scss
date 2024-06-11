@@ -13,7 +13,7 @@
 
 @mixin placeFooter( $padding ) {
 	bottom: calc( $padding + .4em );
-	right: calc( $padding + .2em );
+	right: calc( $padding + .4em );
 }
 
 @mixin placeHeader( $padding ) {

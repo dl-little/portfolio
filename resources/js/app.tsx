@@ -6,7 +6,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import Layout from './Layouts/Layout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Doug Little, Software Engineer';
+const appName = import.meta.env.VITE_APP_NAME || 'Doug Little, Full-Stack Developer';
 
 const setupPageLayout = (module: any, name: string) => {
     module.default.layout ??= (p: any) => <Layout children={p} title={name} />

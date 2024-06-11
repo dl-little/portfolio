@@ -25,4 +25,7 @@ export interface IAuthenticatedPage extends PageProps {
 			email: string
 		}
 	},
+	flash: {
+		message: string | null
+	}
 }
