@@ -47,8 +47,14 @@ small {
 			z-index: -1;
 			width: 100%;
 			height: 10%;
-			left: 0;
-			top: 55%;
+			left: 20%;
+			top: 90%;
+		}
+
+		&.primary {
+			&::after {
+				background-color: $primary;
+			}
 		}
 
 		&.accent {

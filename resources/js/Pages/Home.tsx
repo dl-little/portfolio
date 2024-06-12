@@ -46,6 +46,7 @@ const RotatingTitle = styled.span`
 	}
 `;
 
+// TODO: Make a setting for nouns
 const nouns = [
 	'full-stack developer',
 	'coder',
@@ -90,7 +91,7 @@ const Home = () => {
 
 	return (
 		<HomeContainer id="home-container">
-			<small>Hey, I'm Doug.</small>
+			<p>Hey, I'm Doug.</p>
 			<big>I build things on the web.</big>
 			<Marquee>
 				I'm a

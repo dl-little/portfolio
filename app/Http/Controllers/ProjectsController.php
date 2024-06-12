@@ -34,6 +34,17 @@ class ProjectsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function list(): Response
+    {
+        $projects = ProjectResource::collection( Project::all() );
+        return Inertia::render('Dashboard', compact('projects'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param Project $project
@@ -76,7 +87,7 @@ class ProjectsController extends Controller
             'description' => $request->description,
         ]);
  
-        return redirect(route('projects.index'))->with('message', 'Project created.');
+        return redirect(route('dashboard'))->with('message', 'Project created.');
     }
 
     /**
@@ -107,7 +118,7 @@ class ProjectsController extends Controller
             'github_url' => $request->github_url
         ]);
 
-        return redirect(route('projects.index'))->with('message', 'Project updated.');
+        return redirect(route('dashboard'))->with('message', 'Project updated.');
     }
 
     /**

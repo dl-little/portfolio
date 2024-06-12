@@ -21,8 +21,11 @@
 	left: $padding;
 }
 
-@mixin setArticlePadding( $padding ) {
+@mixin setArticlePadding( $padding, $padding-right: 0) {
 	padding: $padding $padding $padding calc( $padding + calc( $gap + 80px ) );
+	@if $padding-right != 0 {
+		padding-right: calc( $padding + $padding-right );
+	}
 }
 
 @mixin setBlur( $padding ) {

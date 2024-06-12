@@ -144,23 +144,15 @@ footer #footer-wrap {
 }
 #app main article > * {
   max-width: 100%;
-  padding-right: 0;
-}
-@media (min-width: 421px) {
-  #app main article > * {
-    padding-right: 10%;
-  }
-}
-@media (min-width: 768px) {
-  #app main article > * {
-    padding-right: 20%;
-  }
 }
 #app main article > *:first-child {
   margin-block-start: var(--scroll-offset);
 }
 #app main article > *:last-child {
   margin-block-end: calc(1.8em + var(--scroll-offset, 0em));
+}
+#app main article > *:not(:first-child):not(.screen-reader-text + *) {
+  margin-block-start: 0.9rem;
 }
 @media (min-width: 421px) {
   #app::before {
@@ -178,6 +170,7 @@ footer #footer-wrap {
   }
   #app main article {
     padding: 1.35em 1.35em 1.35em calc(1.35em + 0.9em + 80px);
+    padding-right: calc(1.35em + 5%);
   }
   #app main article > *:last-child {
     margin-bottom: calc(2.7em + var(--scroll-offset, 0em));
@@ -203,6 +196,7 @@ footer #footer-wrap {
   }
   #app main article {
     padding: 1.8em 1.8em 1.8em calc(1.8em + 0.9em + 80px);
+    padding-right: calc(1.8em + 10%);
   }
   #app main article > *:last-child {
     margin-bottom: calc(3.6em + var(--scroll-offset, 0em));
@@ -257,8 +251,11 @@ small {
   z-index: -1;
   width: 100%;
   height: 10%;
-  left: 0;
-  top: 55%;
+  left: 20%;
+  top: 90%;
+}
+.emphasis.highlight.primary::after {
+  background-color: #FF9F1C;
 }
 .emphasis.highlight.accent::after {
   background-color: #43FFFF;

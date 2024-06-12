@@ -20,15 +20,6 @@ article {
 
 	& > * {
 		max-width: 100%;
-		padding-right: 0;
-
-		@include tablet {
-			padding-right: 10%;
-		}
-
-		@include desktop {
-			padding-right: 20%;
-		}
 	}
 
 	& > *:first-child {
@@ -39,7 +30,7 @@ article {
 		margin-block-end: calc( $double-gap + var(--scroll-offset, 0em) );
 	}
 
-	// & > *:not(:first-child) {
-	// 	margin-block-start: .9rem;
-	// }
+	& > *:not(:first-child):not(.screen-reader-text + *) {
+		margin-block-start: .9rem;
+	}
 }

@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react';
 
 export interface ILayout extends PropsWithChildren {
 	title?: string
-	user: {
+	user?: {
 		id: number,
 		name: string,
 		email: string

@@ -27,7 +27,7 @@ const Authenticated: React.FC<ILayout> = ({ user, title, children }) => {
     const { flash } = usePage<IAuthenticatedPage>().props;
 
     return (
-        <>
+        <section>
             <AuthenticatedNav user={user} />
             <Children>
                 <RenderIf isTrue={!!flash && !!flash.message} >
@@ -38,7 +38,7 @@ const Authenticated: React.FC<ILayout> = ({ user, title, children }) => {
                 </RenderIf>
                 {children}
             </Children>
-        </>
+        </section>
     );
 }
 

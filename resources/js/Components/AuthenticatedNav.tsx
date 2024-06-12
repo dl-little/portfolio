@@ -13,6 +13,7 @@ const Nav = styled.nav`
     gap: ${gap};
     padding-left: calc(${doubleGap} + 80px);
     padding-top: calc( ${gap} + ${halfGap} );
+	max-width; fit-content;
 
     @media( min-width: ${tabletBreak} ) {
         position: fixed;
@@ -32,11 +33,10 @@ const Nav = styled.nav`
 const routes = {
 	Dashboard: 'dashboard',
 	Profile: 'profile.edit',
-	Projects: 'projects.index'
 }
 
 interface IAuthNav {
-	user: {
+	user?: {
 		id: number,
 		name: string,
 		email: string
@@ -47,7 +47,7 @@ const AuthenticatedNav: React.FC<IAuthNav> = ({ user }) => {
 	return (
 		<Nav id="auth-nav">
 			<RenderIf isTrue={!!user}>
-				<div>{user.name}</div>
+				<div>{user?.name}</div>
 			</RenderIf>
 			{Object.entries(routes).map(([name, url]) => {
 				return (

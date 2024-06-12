@@ -11,9 +11,9 @@
 		@include setBlur( calc( $gap + $half-gap ) );
 
 		article {
-			@include setArticlePadding( calc( $gap + $half-gap ) );
+			@include setArticlePadding( calc( $gap + $half-gap ), 5% );
 			& > *:last-child {
-				margin-bottom: calc( calc( $double-gap * 1.5 ) + var(--scroll-offset, 0em) );
+				margin-bottom: calc( calc( $double-gap * 1.5 ) + var(--scroll-offset, 0em ) );
 			}
 		}
 	}
@@ -36,7 +36,7 @@
 		@include setBlur( $double-gap );
 
 		article {
-			@include setArticlePadding( $double-gap );
+			@include setArticlePadding( $double-gap, 10% );
 			& > *:last-child {
 				margin-bottom: calc( $quad-gap + var(--scroll-offset, 0em) );
 			}
