@@ -39,7 +39,7 @@ article {
 		margin-block-end: calc( $double-gap + var(--scroll-offset, 0em) );
 	}
 
-	& > *:not(:first-child) {
-		margin-block-start: .9rem;
-	}
+	// & > *:not(:first-child) {
+	// 	margin-block-start: .9rem;
+	// }
 }

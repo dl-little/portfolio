@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import variables from '../../scss/abstracts/_shared.module.scss'
-const { gap } = variables;
 import classNames from 'classnames';
 
 const HomeContainer = styled.section`
@@ -20,10 +18,10 @@ const HomeContainer = styled.section`
 
 const Marquee = styled.section`
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 	gap: .2em;
 	align-items: flex-start;
-	overflow: hidden;
+	white-space: nowrap;
 	padding: .2em;
 `;
 
@@ -32,6 +30,10 @@ const Rotating = styled.span`
 	flex-flow: column nowrap;
 	align-self: flex-start;
 	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	transition-property: width;
+	transition-duration: 2s;
 `;
 
 const RotatingTitle = styled.span`
@@ -40,17 +42,30 @@ const RotatingTitle = styled.span`
 
 	&.active {
 		display: block;
+		max-width: fit-content;
 	}
 `;
 
 const nouns = [
 	'full-stack developer',
+	'coder',
 	'former teacher',
+	'proactive communicator',
 	'React developer',
+	'PHP developer',
+	'documentation fiend',
+	'gap-bridger',
+	'chill hang',
+	'container-of-multitudes',
+	'credit-sharer',
+	'software engineer',
 	'WordPress developer',
+	'UI Developer',
+	'writer',
 ];
 
 const Home = () => {
+	const rotating = useRef<HTMLElement | null>(null);
 	const [ activeIndex, setActiveIndex ] = useState(0);
 
 	const changeTitle = () => {
@@ -64,28 +79,30 @@ const Home = () => {
 	}
 
 	useEffect(() => {
-		const interval = setInterval(changeTitle, 3000);
+		if ( !!rotating && !!rotating.current ) {
+			rotating.current.style.width = `${rotating.current.querySelector('.active')?.scrollWidth}px`;
+		}
+		const interval = setTimeout(changeTitle, 3000);
 		return () => {
-			clearInterval(interval);
+			clearTimeout(interval);
 		};
 	}, [activeIndex])
 
 	return (
 		<HomeContainer id="home-container">
-			<small>Hey, I'm Doug!</small>
-			<big>I build <span className="emphasis highlight accent">things</span> on the web.</big>
+			<small>Hey, I'm Doug.</small>
+			<big>I build things on the web.</big>
 			<Marquee>
 				I'm a
-				<Rotating className="emphasis box primary">
+				<Rotating className="emphasis box primary" ref={rotating}>
 						{nouns.map((noun, index) => {
 							return (
-								<RotatingTitle className={classNames("rotating-noun", {active: index === activeIndex})} key={noun}>
-									{noun}
+								<RotatingTitle className={classNames("rotating-noun", {active: index === activeIndex})} key={index}>
+									{`${noun}.`}
 								</RotatingTitle>
 							)
 						})}
 				</Rotating>
-				.
 			</Marquee>
 		</HomeContainer>
 	);

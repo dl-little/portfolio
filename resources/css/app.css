@@ -162,9 +162,6 @@ footer #footer-wrap {
 #app main article > *:last-child {
   margin-block-end: calc(1.8em + var(--scroll-offset, 0em));
 }
-#app main article > *:not(:first-child) {
-  margin-block-start: 0.9rem;
-}
 @media (min-width: 421px) {
   #app::before {
     width: calc(100% - 1.65em);
@@ -249,13 +246,27 @@ small {
   padding: 0.1em;
 }
 .emphasis.box.primary {
-  outline-color: transparent;
+  outline-color: #FF9F1C;
 }
-@media (min-width: 421px) {
-  .emphasis.box.primary {
-    outline-color: #FF9F1C;
-  }
+.emphasis.highlight {
+  position: relative;
 }
+.emphasis.highlight::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 10%;
+  left: 0;
+  top: 55%;
+}
+.emphasis.highlight.accent::after {
+  background-color: #43FFFF;
+}
+.emphasis.highlight.secondary::after {
+  background-color: #E87EA1;
+}
+
 .screen-reader-text {
   border: 0 !important;
   clip: rect(0, 0, 0, 0) !important;

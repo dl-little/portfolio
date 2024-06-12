@@ -10,6 +10,9 @@ import { IAuthenticatedPage } from '@/Components/interfaces';
 const Children = styled.section`
     flex: 1;
     margin-block-start: ${doubleGap};
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
 
     @media( min-width: ${tabletBreak} ) {
         margin-block-start: calc( ${doubleGap} + calc( ${gap} + ${halfGap} ) );
@@ -22,7 +25,6 @@ const Children = styled.section`
 
 const Authenticated: React.FC<ILayout> = ({ user, title, children }) => {
     const { flash } = usePage<IAuthenticatedPage>().props;
-    console.log(flash);
 
     return (
         <>

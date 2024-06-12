@@ -34,15 +34,34 @@ small {
 		padding: .1em;
 
 		&.primary {
-			outline-color: transparent;
-			@include tablet {
-				outline-color: $primary;
-			}
+			outline-color: $primary;
 		}
 	}
 
 	&.highlight {
+		position: relative;
 
+		&::after {
+			content: "";
+			position: absolute;
+			z-index: -1;
+			width: 100%;
+			height: 10%;
+			left: 0;
+			top: 55%;
+		}
+
+		&.accent {
+			&::after {
+				background-color: $accent;
+			}
+		}
+
+		&.secondary {
+			&::after {
+				background-color: $secondary;
+			}
+		}
 	}
 }
 

@@ -47,7 +47,6 @@ const AuthenticatedNav: React.FC<IAuthNav> = ({ user }) => {
 	return (
 		<Nav id="auth-nav">
 			<RenderIf isTrue={!!user}>
-				{/* @ts-ignore:next-line: Block won't render unless user is defined */}
 				<div>{user.name}</div>
 			</RenderIf>
 			{Object.entries(routes).map(([name, url]) => {
