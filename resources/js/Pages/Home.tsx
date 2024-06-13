@@ -79,14 +79,22 @@ const Home = () => {
 		setActiveIndex( randomIndex );
 	}
 
-	useEffect(() => {
+	const setWidthOfParent = () => {
 		if ( !!rotating && !!rotating.current ) {
+			// Using JS to set the width allows for css transition. Need to get the scrollwidth, as 'width: auto' cannot be transitioned.
 			rotating.current.style.width = `${rotating.current.querySelector('.active')?.scrollWidth}px`;
 		}
-		const interval = setTimeout(changeTitle, 3000);
+	}
+
+	useEffect(() => {
+		const interval = setInterval(changeTitle, 3000);
 		return () => {
-			clearTimeout(interval);
+			clearInterval(interval);
 		};
+	}, [])
+
+	useEffect(() => {
+		setWidthOfParent();
 	}, [activeIndex])
 
 	return (
@@ -98,7 +106,7 @@ const Home = () => {
 				<Rotating className="emphasis box primary" ref={rotating}>
 						{nouns.map((noun, index) => {
 							return (
-								<RotatingTitle className={classNames("rotating-noun", {active: index === activeIndex})} key={index}>
+								<RotatingTitle className={classNames("rotating-noun", {active: index === activeIndex})} key={noun}>
 									{`${noun}.`}
 								</RotatingTitle>
 							)
