@@ -53,6 +53,7 @@ const nouns = [
 	'former teacher',
 	'proactive communicator',
 	'React developer',
+	'capable person',
 	'PHP developer',
 	'documentation fiend',
 	'gap-bridger',
@@ -61,7 +62,7 @@ const nouns = [
 	'credit-sharer',
 	'software engineer',
 	'WordPress developer',
-	'UI Developer',
+	'UI developer',
 	'writer',
 ];
 
@@ -87,7 +88,7 @@ const Home = () => {
 	}
 
 	useEffect(() => {
-		const interval = setInterval(changeTitle, 3000);
+		const interval = setInterval(changeTitle, 2500);
 		return () => {
 			clearInterval(interval);
 		};

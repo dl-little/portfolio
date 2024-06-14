@@ -94,9 +94,10 @@ footer #footer-wrap {
 #app::before {
   position: absolute;
   content: "";
-  border: 0.2em solid #1F2933;
+  border-right: 0.2em solid #1F2933;
+  border-left: 0.2em solid #1F2933;
   width: calc(100% - 1.2em);
-  height: calc(100% - 1.2em);
+  height: calc(100% - 1.2em + 0.3em);
   left: 0.45em;
   top: 0.45em;
   z-index: 1;
@@ -107,21 +108,22 @@ footer #footer-wrap {
 }
 #app main::before, #app main::after {
   height: 0.45em;
+  width: calc(100% - 0.9em);
+  left: 0.45em;
 }
 #app main::before, #app main::after {
   position: absolute;
-  left: 0;
-  width: 100%;
   content: "";
   z-index: 2;
   background-color: rgba(250, 249, 240, 0.8);
   backdrop-filter: blur(0.1em);
 }
 #app main::before {
-  top: 0;
+  border-bottom: 0.2em solid #1F2933;
 }
 #app main::after {
   bottom: 0;
+  border-top: 0.2em solid #1F2933;
 }
 #app main article {
   z-index: 1;
@@ -131,6 +133,7 @@ footer #footer-wrap {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   padding: 0.9em 0.9em 0.9em calc(0.9em + 0.9em + 80px);
+  padding-right: calc(0.9em + 2.5%);
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -157,7 +160,7 @@ footer #footer-wrap {
 @media (min-width: 421px) {
   #app::before {
     width: calc(100% - 1.65em);
-    height: calc(100% - 1.65em);
+    height: calc(100% - 1.65em + 0.3em);
     left: 0.675em;
     top: 0.675em;
   }
@@ -167,6 +170,8 @@ footer #footer-wrap {
   }
   #app main::before, #app main::after {
     height: 0.675em;
+    width: calc(100% - 1.35em);
+    left: 0.675em;
   }
   #app main article {
     padding: 1.35em 1.35em 1.35em calc(1.35em + 0.9em + 80px);
@@ -183,7 +188,7 @@ footer #footer-wrap {
 @media (min-width: 768px) {
   #app::before {
     width: calc(100% - 2.1em);
-    height: calc(100% - 2.1em);
+    height: calc(100% - 2.1em + 0.3em);
     left: 0.9em;
     top: 0.9em;
   }
@@ -193,6 +198,8 @@ footer #footer-wrap {
   }
   #app main::before, #app main::after {
     height: 0.9em;
+    width: calc(100% - 1.8em);
+    left: 0.9em;
   }
   #app main article {
     padding: 1.8em 1.8em 1.8em calc(1.8em + 0.9em + 80px);
@@ -249,10 +256,15 @@ small {
   content: "";
   position: absolute;
   z-index: -1;
-  width: 100%;
+  width: 80%;
   height: 10%;
   left: 20%;
   top: 90%;
+}
+@media (min-width: 421px) {
+  .emphasis.highlight::after {
+    width: 100%;
+  }
 }
 .emphasis.highlight.primary::after {
   background-color: #FF9F1C;

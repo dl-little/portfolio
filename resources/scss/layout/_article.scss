@@ -5,7 +5,7 @@ article {
 	overflow-y: scroll;
 	scrollbar-width: none; /* Firefox */
 	-ms-overflow-style: none;  /* Internet Explorer 10+ */
-	@include setArticlePadding( $gap );
+	@include setArticlePadding( $gap, 2.5% );
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;

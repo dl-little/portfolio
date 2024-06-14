@@ -2,13 +2,15 @@ import styled from 'styled-components';
 import { ISharedProps } from '@/Components/interfaces';
 
 import variables from '../../../scss/abstracts/_shared.module.scss';
-const { gap, halfGap, doubleGap, desktopBreak, tabletBreak } = variables;
+const { gap, primary, contrast } = variables;
 
 const ProjectsContainer = styled.ul`
 `;
 
 const ProjectsHeading = styled.h2`
     display: inline-block;
+    color: ${primary};
+    font-size: .9em;
 `;
 
 const ProjectCard = styled.li`
@@ -16,6 +18,10 @@ const ProjectCard = styled.li`
     
     &:not(:first-child) {
         margin-block-start: ${gap};
+    }
+
+    & big {
+        color: ${contrast};
     }
 `
 

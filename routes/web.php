@@ -12,10 +12,12 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/contact', [ContactController::class, 'index']);
 
+Route::resource('projects', ProjectsController::class);
+
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/dashboard', [ProjectsController::class, 'list'])->name('dashboard');
     
-    Route::resource('projects', ProjectsController::class);
+    Route::resource('projects', ProjectsController::class, ['only' => ['edit', 'destroy', 'store', 'update', 'create']]);
 });
 
 Route::middleware('auth')->group(function () {
