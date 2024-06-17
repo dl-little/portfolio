@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import styled from "styled-components";
 import classNames from 'classnames';
+import RenderIf from "@/Components/RenderIf";
 
 const HomeContainer = styled.section`
 	display: flex;
@@ -46,6 +47,12 @@ const RotatingTitle = styled.span`
 	}
 `;
 
+const PauseButton = styled.button`
+	cursor: pointer;
+	width: 15px;
+	line-height: 1em;
+`
+
 // TODO: Make a setting for nouns
 const nouns = [
 	'full-stack developer',
@@ -69,6 +76,18 @@ const nouns = [
 const Home = () => {
 	const rotating = useRef<HTMLElement | null>(null);
 	const [ activeIndex, setActiveIndex ] = useState(0);
+	const [ intervalId, setIntervalId ] = useState(0);
+
+	const handleClick = () => {
+		if ( intervalId > 0 ) {
+			clearInterval(intervalId);
+			setIntervalId(0);
+		} else {
+			{/* @ts-expect-error: It is insisting on the type being NodeJS.Timeout */}
+			const interval: number = setInterval(changeTitle, 2500);
+			setIntervalId(interval);
+		}
+	}
 
 	const changeTitle = () => {
 		let randomIndex = Math.floor( Math.random() * nouns.length );
@@ -80,6 +99,16 @@ const Home = () => {
 		setActiveIndex( randomIndex );
 	}
 
+	useLayoutEffect(() => {
+		{/* @ts-expect-error: It is insisting on the type being NodeJS.Timeout */}
+		const interval: number = setInterval(changeTitle, 2500);
+		setIntervalId(interval);
+	
+		return () => {
+			clearInterval(intervalId);
+		};
+	}, [])
+
 	const setWidthOfParent = () => {
 		if ( !!rotating && !!rotating.current ) {
 			// Using JS to set the width allows for css transition. Need to get the scrollwidth, as 'width: auto' cannot be transitioned.
@@ -88,19 +117,12 @@ const Home = () => {
 	}
 
 	useEffect(() => {
-		const interval = setInterval(changeTitle, 2500);
-		return () => {
-			clearInterval(interval);
-		};
-	}, [])
-
-	useEffect(() => {
 		setWidthOfParent();
 	}, [activeIndex])
 
 	return (
 		<HomeContainer id="home-container">
-			<p>Hey, I'm Doug.</p>
+			<p className="emphasis highlight accent">Hey, I'm Doug.</p>
 			<big>I build things on the web.</big>
 			<Marquee>
 				I'm a
@@ -113,6 +135,17 @@ const Home = () => {
 							)
 						})}
 				</Rotating>
+				<PauseButton onClick={handleClick} data-action={ intervalId > 0 ? 'stop' : 'start'}>
+					<p className="screen-reader-text">
+						{`${intervalId > 0 ? 'Stop' : 'Start'} animation`}
+					</p>
+					<RenderIf isTrue={intervalId > 0}>
+						&#x23F8;
+					</RenderIf>
+					<RenderIf isTrue={intervalId === 0}>
+						&#x23F5;
+					</RenderIf>
+				</PauseButton>
 			</Marquee>
 		</HomeContainer>
 	);
