@@ -20,7 +20,8 @@ class ProjectResource extends JsonResource
             'image' => asset( '/storage/' . $this->image ),
             'github_url' => $this->github_url,
             'keywords' => $this->keywords,
-            'description' => $this->description
+            'description' => $this->description,
+            'is_hosted' => $this->is_hosted
         ];
     }
 }

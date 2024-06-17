@@ -17,13 +17,14 @@ const Form = styled.form`
 `;
 
 const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
-	const { description, github_url, id, image, keywords, title } = project;
+	const { description, github_url, id, keywords, title, is_hosted } = project;
 	const { data, setData, errors, progress }= useForm({
 		title: title,
 		image: undefined,
 		github_url: github_url || '',
 		keywords: keywords || '',
-		description: description || ''
+		description: description || '',
+		is_hosted: is_hosted
 	});
 
 	const handleFileUpload = ((e: ChangeEvent<HTMLInputElement>) => {
@@ -44,6 +45,16 @@ const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
 		}));
 	});
 
+	const handleCheckboxChange = ((e: ChangeEvent<HTMLInputElement>) => {
+		const key = e.target.id;
+		const value = e.target.checked;
+		console.log(value);
+		setData(values => ({
+			...values,
+			[key]: value ? 1 : 0,
+		}));
+	});
+
 	const handleSubmit = ((e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		Inertia.post(`/projects/${id}`, {
@@ -52,7 +63,8 @@ const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
 			image: data.image || '',
 			github_url: data.github_url,
 			keywords: data.keywords,
-			description: data.description
+			description: data.description,
+			is_hosted: data.is_hosted
 		});
 	});
 
@@ -87,6 +99,10 @@ const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
 				<label htmlFor="description">Description:</label>
 				<textarea id="description" value={data.description} onChange={handleInputChange} />
 				<InputError message={errors.description} />
+			</FormGroup>
+			<FormGroup>
+				<label htmlFor="is_hosted">Is Hosted:</label>
+				<input type="checkbox" id="is_hosted" value={data.is_hosted} checked={!!data.is_hosted} onChange={handleCheckboxChange} />
 			</FormGroup>
 			<button type="submit">Update</button>
 		</Form>

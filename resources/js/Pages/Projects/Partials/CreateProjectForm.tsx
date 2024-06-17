@@ -20,7 +20,8 @@ const CreateProjectForm = () => {
 		image: undefined,
 		github_url: '',
 		keywords: '',
-		description: ''
+		description: '',
+		is_hosted: 0
 	});
 
 	const handleFileUpload = ((e: ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +39,15 @@ const CreateProjectForm = () => {
 		setData(values => ({
 			...values,
 			[key]: value,
+		}));
+	});
+
+	const handleCheckboxChange = ((e: ChangeEvent<HTMLInputElement>) => {
+		const key = e.target.id;
+		const value = e.target.checked;
+		setData(values => ({
+			...values,
+			[key]: value ? 1 : 0,
 		}));
 	});
 
@@ -77,6 +87,10 @@ const CreateProjectForm = () => {
 				<label htmlFor="description">Description:</label>
 				<textarea id="description" value={data.description} onChange={handleInputChange} />
 				<InputError message={errors.description} />
+			</FormGroup>
+			<FormGroup>
+				<label htmlFor="is_hosted">Is Hosted:</label>
+				<input type="checkbox" id="is_hosted" value={data.is_hosted} checked={!!data.is_hosted} onChange={handleCheckboxChange} />
 			</FormGroup>
 			<button type="submit">Store</button>
 		</Form>
