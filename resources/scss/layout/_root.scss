@@ -1,3 +1,26 @@
+@import '../abstracts/mixins';
+@import '../abstracts/colors';
+
 .disabled {
 	pointer-events: none;
+}
+
+.inertia-link {
+	transition-property: color;
+	transition-duration: .3s;
+	transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+	color: $contrast;
+	text-decoration: underline;
+	text-decoration-color: $secondary;
+
+	@include hovered {
+		color: $secondary;
+	}
+}
+
+.icon-link {
+
+	@include hovered {
+		color: $secondary;
+	}
 }

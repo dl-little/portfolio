@@ -1,20 +1,17 @@
+import { Link } from '@inertiajs/react';
+import Heading from '@/Components/Heading';
+import GHLogo from '@/Components/logos/GHLogo';
 import styled from 'styled-components';
 import { ISharedProps } from '@/Components/interfaces';
+import RenderIf from '@/Components/RenderIf';
 
 import variables from '../../../scss/abstracts/_shared.module.scss';
-const { gap, primary, contrast } = variables;
-
-const ProjectsContainer = styled.ul`
-`;
-
-const ProjectsHeading = styled.h2`
-    display: inline-block;
-    color: ${primary};
-    font-size: .9em;
-`;
+const { halfGap, gap, contrast, secondary, primary } = variables;
 
 const ProjectCard = styled.li`
-    display: block;
+    display: flex;
+    align-items: flex-end;
+    gap: ${halfGap};
     
     &:not(:first-child) {
         margin-block-start: ${gap};
@@ -32,6 +29,7 @@ export interface IProject {
     image: string
     keywords?: string
     title: string
+    is_hosted: boolean
 }
 
 interface IProjectsIndex extends ISharedProps{
@@ -43,18 +41,37 @@ interface IProjectsIndex extends ISharedProps{
 const Index: React.FC<IProjectsIndex> = ({ projects }) => {
     const { data } = projects;
     return (
-        <>
-            <ProjectsContainer>
-                <ProjectsHeading aria-hidden="true" className="emphasis highlight accent">Projects</ProjectsHeading>
-                {data.map((project) => {
-                    return (
-                        <ProjectCard key={project.id}>
-                            <big>{project.title}</big>
-                        </ProjectCard>
-                    )
-                })}
-            </ProjectsContainer>
-        </>
+        <section>
+            <Heading>Projects</Heading>
+            {data.map((project) => {
+                return (
+                    <ProjectCard key={project.id}>
+                        <RenderIf isTrue={!!project.keywords}>
+                            <small>{project.keywords}</small>
+                        </RenderIf>
+                        <big>
+                            <RenderIf isTrue={project.is_hosted}>
+                                <Link className='inertia-link' href={route('projects.show', project.id)}>
+                                    {project.title}
+                                </Link>
+                            </RenderIf>
+                            <RenderIf isTrue={!project.is_hosted}>
+                                {project.title}
+                            </RenderIf>
+                        </big>
+                        <RenderIf isTrue={!!project.github_url}>
+                            <a href={project.github_url} className="icon-link" title={`Github link for ${project.title}`}>
+                                <GHLogo
+                                    primary={contrast}
+                                    hover={secondary} 
+                                    width={20}
+                                />
+                            </a>
+                        </RenderIf>
+                    </ProjectCard>
+                )
+            })}
+        </section>
     );
 }
 

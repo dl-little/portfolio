@@ -1,4 +1,4 @@
-import Logo from './Logo';
+import Logo from './logos/Logo';
 import { usePage, Link } from '@inertiajs/react';
 import classNames from 'classnames';
 
