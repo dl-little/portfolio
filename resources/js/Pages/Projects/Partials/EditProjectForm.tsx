@@ -39,6 +39,7 @@ const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
 	const handleInputChange = ((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const key = e.target.id;
 		const value = e.target.value;
+
 		setData(values => ({
 			...values,
 			[key]: value,
@@ -48,7 +49,7 @@ const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
 	const handleCheckboxChange = ((e: ChangeEvent<HTMLInputElement>) => {
 		const key = e.target.id;
 		const value = e.target.checked;
-		console.log(value);
+
 		setData(values => ({
 			...values,
 			[key]: value ? 1 : 0,
@@ -97,12 +98,12 @@ const EditProjectForm: React.FC<{ project: IProject }> = ({ project }) => {
 			</FormGroup>
 			<FormGroup>
 				<label htmlFor="description">Description:</label>
-				<textarea id="description" value={data.description} onChange={handleInputChange} />
+				<textarea rows={20} cols={90} id="description" value={data.description} onChange={handleInputChange} />
 				<InputError message={errors.description} />
 			</FormGroup>
 			<FormGroup>
 				<label htmlFor="is_hosted">Is Hosted:</label>
-				<input type="checkbox" id="is_hosted" value={data.is_hosted} checked={!!data.is_hosted} onChange={handleCheckboxChange} />
+				<input type="checkbox" id="is_hosted" value={+ data.is_hosted} checked={!!data.is_hosted} onChange={handleCheckboxChange} />
 			</FormGroup>
 			<button type="submit">Update</button>
 		</Form>
