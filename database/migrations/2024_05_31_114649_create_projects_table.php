@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('github_url')->nullable();
             $table->string('keywords')->nullable();
             $table->longText('description')->nullable();
+            $table->integer('is_hosted')->nullable();
             $table->timestamps();
         });
     }

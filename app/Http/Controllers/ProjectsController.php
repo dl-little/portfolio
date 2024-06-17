@@ -57,6 +57,19 @@ class ProjectsController extends Controller
     }
 
     /**
+     * Direct to the details page for a specified resource.
+     *
+     * @param Request $request
+     * @param Project $project
+     *
+     * @return \Inertia\Response
+     */
+    public function show(Project $project): Response
+    {
+        return Inertia::render('Projects/Show', compact('project'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -85,6 +98,7 @@ class ProjectsController extends Controller
             'github_url' => $request->github_url,
             'keywords' => $request->keywords,
             'description' => $request->description,
+            'is_hosted' => $request->is_hosted,
         ]);
  
         return redirect(route('dashboard'))->with('message', 'Project created.');
@@ -115,7 +129,8 @@ class ProjectsController extends Controller
             'image' => $image,
             'keywords' => $request->keywords,
             'description' => $request->description,
-            'github_url' => $request->github_url
+            'github_url' => $request->github_url,
+            'is_hosted' => $request->is_hosted
         ]);
 
         return redirect(route('dashboard'))->with('message', 'Project updated.');

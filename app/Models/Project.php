@@ -14,6 +14,11 @@ class Project extends Model
         'image',
         'github_url',
         'keywords',
-        'description'
+        'description',
+        'is_hosted'
+    ];
+
+    protected $casts = [
+        'is_hosted' => 'boolean'
     ];
 }
