@@ -85,7 +85,7 @@ const CreateProjectForm = () => {
 			</FormGroup>
 			<FormGroup>
 				<label htmlFor="description">Description:</label>
-				<textarea id="description" value={data.description} onChange={handleInputChange} />
+				<textarea rows={20} cols={90} id="description" value={data.description} onChange={handleInputChange} />
 				<InputError message={errors.description} />
 			</FormGroup>
 			<FormGroup>
