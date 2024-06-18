@@ -34,17 +34,6 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Inertia\Response
-     */
-    public function list(): Response
-    {
-        $projects = ProjectResource::collection( Project::all() );
-        return Inertia::render('Dashboard', compact('projects'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Project $project

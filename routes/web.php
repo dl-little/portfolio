@@ -4,6 +4,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,7 +17,7 @@ Route::get('/contact', [ContactController::class, 'index']);
 Route::resource('projects', ProjectsController::class);
 
 Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/dashboard', [ProjectsController::class, 'list'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::resource('projects', ProjectsController::class, ['only' => ['edit', 'destroy', 'store', 'update', 'create']]);
 });
