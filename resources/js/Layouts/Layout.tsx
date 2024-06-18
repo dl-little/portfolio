@@ -1,24 +1,27 @@
 import { Head } from '@inertiajs/react';
 import Header from '@/Components/Header';
-import Main from '@/Components/Main';
+import Article from '@/Components/Article';
 import Footer from '@/Components/Footer';
 import { PropsWithChildren } from 'react';
 
-interface ILayout extends PropsWithChildren {
-	title: string
+export interface ILayout extends PropsWithChildren {
+	title?: string
+	user?: {
+		id: number,
+		name: string,
+		email: string
+	}
 }
 
 const Layout: React.FC<ILayout> = ({ children, title }) => {
-
+	
 	return (
 		<>
 			<Head title={title} />
 			<Header />
-			<Main>
-				<article>
-					{children}
-				</article>
-			</Main>
+			<main id="main">
+				<Article children={children} />
+			</main>
 			<Footer />
 		</>
 	)

@@ -1,4 +1,4 @@
-import Logo from './Logo';
+import Logo from './logos/Logo';
 import { usePage, Link } from '@inertiajs/react';
 import classNames from 'classnames';
 
@@ -6,9 +6,14 @@ const Header: React.FC = () => {
 	const { url } = usePage();
 
 	return (
-		<header>
+		<header id="header">
 			<div id="header-wrap">
-				<Link id="logo-wrap" href="/">
+				<Link
+					id="logo-wrap"
+					aria-disabled={url === '/'}
+					className={classNames({disabled: url === '/'})}
+					href={ url === '/' ? '#' : '/' }
+				>
 					<Logo />
 				</Link>
 				<h1 className="screen-reader-text">Doug Little</h1>

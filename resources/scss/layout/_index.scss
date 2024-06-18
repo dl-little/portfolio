@@ -1,4 +1,5 @@
 @import '../abstracts';
+@import 'root';
 @import 'header';
 @import 'footer';
 
@@ -13,12 +14,13 @@
 	box-sizing: border-box;
 	background-color: $tertiary;
 	overflow: hidden;
-	font-family: 'Verdana';
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 	&::before {
 		position: absolute;
 		content: "";
-		border: .2em solid $dark-blue;
+		border-right: .2em solid $dark-blue;
+		border-left: .2em solid $dark-blue;
 		@include setFrame( $gap );
 		z-index: 1;
 	}
@@ -30,8 +32,6 @@
 
 		&::before, &::after {
 			position: absolute;
-			left: 0;
-			width: 100%;
 			content: "";
 			z-index: 2;
 			background-color: rgba( $tertiary, .8 );
@@ -39,31 +39,15 @@
 		}
 
 		&::before {
-			top: 0;
+			border-bottom: .2em solid $dark-blue;
 		}
 
 		&::after {
 			bottom: 0;
+			border-top: .2em solid $dark-blue;
 		}
 
-		article {
-			z-index: 1;
-			position: relative;
-			height: 100%;
-			overflow-y: scroll;
-			scrollbar-width: none; /* Firefox */
-			-ms-overflow-style: none;  /* Internet Explorer 10+ */
-			@include setArticlePadding( $gap );
-
-			&::-webkit-scrollbar { /* WebKit */
-				width: 0;
-				height: 0;
-			}
-
-			& > *:last-child {
-				margin-bottom: $double-gap;
-			}
-		}
+		@import 'article';
 	}
 
 	@import './_layout-queries';

@@ -1,23 +1,26 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/projects', [ProjectsController::class, 'index']);
+Route::get('/contact', [ContactController::class, 'index']);
 
-Route::get('/contact', function() {
-    return Inertia::render('Contact');
+Route::resource('projects', ProjectsController::class);
+
+Route::middleware(['auth', 'verified'])->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+    Route::post('/settings/store', [SettingsController::class, 'store'])->name('settings.store');
+    
+    Route::resource('projects', ProjectsController::class, ['only' => ['edit', 'destroy', 'store', 'update', 'create']]);
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

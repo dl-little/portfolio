@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
 
 interface IRenderIf extends PropsWithChildren {
-	condition: boolean
+	isTrue: boolean
 }
 
-const RenderIf: React.FC<IRenderIf> = ({ condition, children }) => {
-	if (!condition) {
+const RenderIf: React.FC<IRenderIf> = ({ isTrue, children }) => {
+	if (!isTrue) {
 		return null
 	}
 

@@ -6,14 +6,14 @@
 
 @mixin setFrame( $padding ) {
 	width: calc(100% - calc( $padding + .3em ) );
-	height: calc(100% - calc( $padding + .3em ) );
+	height: calc(100% - calc( $padding + .3em ) + .3em );
 	left: calc( $padding / 2 );
 	top: calc( $padding / 2 );
 }
 
 @mixin placeFooter( $padding ) {
 	bottom: calc( $padding + .4em );
-	right: calc( $padding + .2em );
+	right: calc( $padding + .4em );
 }
 
 @mixin placeHeader( $padding ) {
@@ -21,12 +21,17 @@
 	left: $padding;
 }
 
-@mixin setArticlePadding( $padding ) {
+@mixin setArticlePadding( $padding, $padding-right: 0) {
 	padding: $padding $padding $padding calc( $padding + calc( $gap + 80px ) );
+	@if $padding-right != 0 {
+		padding-right: calc( $padding + $padding-right );
+	}
 }
 
 @mixin setBlur( $padding ) {
 	&::before, &::after {
 		height: calc( $padding / 2 );
+		width: calc( 100% - $padding );
+		left: calc( $padding / 2 );
 	}
 }

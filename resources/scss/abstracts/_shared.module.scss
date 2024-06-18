@@ -1,4 +1,6 @@
 @import 'variables';
+@import 'queries';
+@import 'colors';
 
 :export {
 	gap: $gap;
@@ -7,4 +9,19 @@
 	halfGap: $half-gap;
 	buttonPadding: $button-padding;
 	largeButtonPadding: $large-button-padding;
+	quarterGap: $quarter-gap;
+	quadGap: $quad-gap;
+	desktopBreak: $desktop-break;
+	tabletBreak: $tablet-break;
+	primary: $primary;
+	secondary: $secondary;
+	accent: $accent;
+	tertiary: $tertiary;
+	contrast: $contrast;
+	white: $white;
+	transparent: $transparent;
+	beige: $beige;
+	darkBlue: $dark-blue;
+	darkPrimary: $dark-primary;
+	darkSecondary: $dark-secondary;
 }

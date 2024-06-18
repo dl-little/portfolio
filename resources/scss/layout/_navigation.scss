@@ -16,7 +16,7 @@
 				color: $secondary;
 				opacity: 0;
 				transition-property: opacity;
-				transition: .2s;
+				transition-duration: .3s;
 				transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 			}
 
@@ -39,7 +39,7 @@
 				color: $dark-blue;
 				font-weight: $bold;
 				transition-property: color;
-				transition: .3s;
+				transition-duration: .3s;
 				transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 				text-decoration: none;
 

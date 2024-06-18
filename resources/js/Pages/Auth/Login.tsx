@@ -1,14 +1,19 @@
-import { useEffect } from 'react';
+import { FormEvent, useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
-import Layout from '@/Layouts/Layout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { PageProps } from '@inertiajs/core';
+import { Link, useForm } from '@inertiajs/react';
+import FormGroup from '@/Components/FormGroup';
+import { ISharedProps } from '@/Components/interfaces';
+import styled from 'styled-components';
 
-const Login = ({ status, canResetPassword }) => {
+const Form = styled.form`
+    max-width: 100%;
+`;
+
+const Login: React.FC<ISharedProps> = ({ status, canResetPassword }) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -21,7 +26,7 @@ const Login = ({ status, canResetPassword }) => {
         };
     }, []);
 
-    const submit = (e) => {
+    const submit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         post(route('login'));
@@ -29,12 +34,10 @@ const Login = ({ status, canResetPassword }) => {
 
     return (
         <>
-            <Head title="Log in" />
+            {status && <div>{status}</div>}
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
-            <form onSubmit={submit}>
-                <div>
+            <Form onSubmit={submit}>
+                <FormGroup>
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
@@ -42,16 +45,15 @@ const Login = ({ status, canResetPassword }) => {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
                         autoComplete="username"
                         isFocused={true}
                         onChange={(e) => setData('email', e.target.value)}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+                    <InputError message={errors.email} />
+                </FormGroup>
 
-                <div className="mt-4">
+                <FormGroup>
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
@@ -59,48 +61,46 @@ const Login = ({ status, canResetPassword }) => {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
+                    <InputError message={errors.password}/>
+                </FormGroup>
 
-                <div className="block mt-4">
+                <FormGroup>
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ms-2 text-sm text-gray-600">Remember me</span>
+                        <span>Remember me</span>
                     </label>
-                </div>
+                </FormGroup>
 
-                <div className="flex items-center justify-end mt-4">
+                <FormGroup>
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Forgot your password?
                         </Link>
                     )}
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                        <Link
+                            href={route('register')}
+                        >
+                            Sign Up
+                        </Link>
+
+                    <PrimaryButton disabled={processing}>
                         Log in
                     </PrimaryButton>
-                </div>
-            </form>
+                </FormGroup>
+            </Form>
         </>
     );
-}
-
-Login.layout = (page: PageProps) => {
-    return (
-        <Layout children={page} title="Log in" />
-    )
 }
 
 export default Login;

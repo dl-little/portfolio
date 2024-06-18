@@ -1,9 +1,4 @@
-import { usePage, Link } from '@inertiajs/react';
-import { ISharedProps } from "./interfaces";
-
 const Footer = () => {
-	const { props, url } = usePage<ISharedProps>()
-	const { auth } = props
 
 	return (
 		<footer>
