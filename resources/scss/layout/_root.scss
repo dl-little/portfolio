@@ -12,6 +12,7 @@
 	color: $contrast;
 	text-decoration: underline;
 	text-decoration-color: $secondary;
+	text-decoration-thickness: auto;
 
 	@include hovered {
 		color: $secondary;
@@ -19,7 +20,6 @@
 }
 
 .icon-link {
-
 	@include hovered {
 		color: $secondary;
 	}
