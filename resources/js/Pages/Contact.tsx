@@ -1,7 +1,9 @@
+import Heading from "@/Components/Heading";
+
 const Contact = () => {
 	return (
 		<>
-			<p>contact</p>
+			<Heading>Contact</Heading>
 		</>
 	);
 }
