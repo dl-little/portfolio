@@ -23,7 +23,7 @@ const ProjectImage = styled.img`
 	height: 75px;
 	width: 75px;
 	object-fit: cover;
-	border: 2px solid ${secondary};
+	border: .2em solid ${secondary};
 
 	@media( min-width: ${tabletBreak} ) {
         width: 150px;
