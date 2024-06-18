@@ -6,22 +6,53 @@ import { ISharedProps } from '@/Components/interfaces';
 import RenderIf from '@/Components/RenderIf';
 
 import variables from '../../../scss/abstracts/_shared.module.scss';
-const { halfGap, gap, contrast, secondary, primary } = variables;
+const { halfGap, gap, largeGap, contrast, secondary, tabletBreak, quarterGap } = variables;
+
+const IndexContainer = styled.section`
+    & > *:not(:first-child) {
+        margin-block-start: ${gap};
+    }
+`;
+
+const ProjectCards = styled.ul`
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+
+    & > *:not(:first-child) {
+        margin-block-start: ${largeGap};
+        @media( min-width: ${tabletBreak} ) {
+            margin-block-start: ${gap};
+        }
+    }
+`;
 
 const ProjectCard = styled.li`
     display: flex;
+    flex-flow: row wrap;
     align-items: flex-end;
-    gap: ${halfGap};
-    
-    &:not(:first-child) {
-        margin-block-start: ${gap};
+    justify-content: flex-end;
+    gap: ${quarterGap};
+    @media( min-width: ${tabletBreak} ) {
+        gap: ${halfGap};
     }
 
     & big {
         color: ${contrast};
     }
-`
+`;
 
+const Keywords = styled.small`
+    font-style: italic;
+`;
+
+const Links = styled.span`
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: ${halfGap};
+`;
 export interface IProject {
     description?: string
     github_url?: string
@@ -41,37 +72,41 @@ interface IProjectsIndex extends ISharedProps{
 const Index: React.FC<IProjectsIndex> = ({ projects }) => {
     const { data } = projects;
     return (
-        <section>
+        <IndexContainer>
             <Heading>Projects</Heading>
-            {data.map((project) => {
-                return (
-                    <ProjectCard key={project.id}>
-                        <RenderIf isTrue={!!project.keywords}>
-                            <small>{project.keywords}</small>
-                        </RenderIf>
-                        <big>
-                            <RenderIf isTrue={project.is_hosted}>
-                                <Link className='inertia-link' href={route('projects.show', project.id)}>
-                                    {project.title}
-                                </Link>
+            <ProjectCards>
+                {data.map((project) => {
+                    return (
+                        <ProjectCard key={project.id}>
+                            <RenderIf isTrue={!!project.keywords}>
+                                <Keywords>{project.keywords}</Keywords>
                             </RenderIf>
-                            <RenderIf isTrue={!project.is_hosted}>
-                                {project.title}
-                            </RenderIf>
-                        </big>
-                        <RenderIf isTrue={!!project.github_url}>
-                            <a href={project.github_url} className="icon-link" title={`Github link for ${project.title}`}>
-                                <GHLogo
-                                    primary={contrast}
-                                    hover={secondary} 
-                                    width={20}
-                                />
-                            </a>
-                        </RenderIf>
-                    </ProjectCard>
-                )
-            })}
-        </section>
+                            <Links>
+                                <big>
+                                    <RenderIf isTrue={project.is_hosted}>
+                                        <Link className='inertia-link' href={route('projects.show', project.id)}>
+                                            {project.title}
+                                        </Link>
+                                    </RenderIf>
+                                    <RenderIf isTrue={!project.is_hosted}>
+                                        {project.title}
+                                    </RenderIf>
+                                </big>
+                                <RenderIf isTrue={!!project.github_url}>
+                                    <a href={project.github_url} className="icon-link" title={`Github link for ${project.title}`}>
+                                        <GHLogo
+                                            primary={contrast}
+                                            hover={secondary} 
+                                            width={20}
+                                        />
+                                    </a>
+                                </RenderIf>
+                            </Links>
+                        </ProjectCard>
+                    )
+                })}
+            </ProjectCards>
+        </IndexContainer>
     );
 }
 
