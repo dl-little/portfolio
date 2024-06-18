@@ -12,7 +12,6 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/contact', [ContactController::class, 'index']);
 
-Route::get('projects/{id}', [ProjectsController::class, 'show'])->name('projects.show');
 Route::resource('projects', ProjectsController::class);
 
 Route::middleware(['auth', 'verified'])->group(function() {
