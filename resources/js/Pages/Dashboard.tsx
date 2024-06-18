@@ -14,8 +14,15 @@ const TableCell = styled.td`
     img {
         width: 100%;
         height: 100px;
-        object-fit: cover;
+        object-fit: contain;
     }
+`;
+
+const TableCellDescription = styled.td`
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `;
 
 export interface IProject {
@@ -83,9 +90,9 @@ const dashboard: React.FC<IProjectsIndex> = ({ auth, projects }) => {
                                 <TableCell>
                                     {project.github_url}
                                 </TableCell>
-                                <TableCell>
+                                <TableCellDescription>
                                     {project.description}
-                                </TableCell>
+                                </TableCellDescription>
                                 <TableCell>
                                     <Link
                                         href={route('projects.edit', project.id)} 
