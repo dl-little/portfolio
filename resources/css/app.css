@@ -9,6 +9,7 @@
   color: #1F2933;
   text-decoration: underline;
   text-decoration-color: #E87EA1;
+  text-decoration-thickness: auto;
 }
 .inertia-link:hover, .inertia-link:focus, .inertia-link:focus-within {
   color: #E87EA1;
