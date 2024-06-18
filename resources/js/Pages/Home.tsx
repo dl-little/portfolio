@@ -47,17 +47,15 @@ const Rotating = styled.span`
 `;
 
 const RotatingTitle = styled.span`
-	opacity: 0;
-	transition-property: opacity;
-	transition-duration: 1s;
-
+	display: none;
+	transition-property: display;
 	.paused & {
 		scroll-snap-align: start;
-		opacity: 1;
+		display: block;
 	}
 
 	&.active {
-		opacity: 1;
+		display: block;
 		max-width: fit-content;
 	}
 `;
@@ -102,7 +100,6 @@ const Home = () => {
 			{/* @ts-expect-error: It is insisting on the type being NodeJS.Timeout */}
 			const interval: number = setInterval(changeTitle, 2500) as number;
 			setIntervalId(interval);
-			scrollToActive();
 		}
 	}
 
@@ -135,21 +132,10 @@ const Home = () => {
 		rotating.current.style.width = `${rotating.current.querySelector('.active')?.scrollWidth}px`;
 	}
 
-	const scrollToActive = () => {
-		if ( !rotating || !rotating.current ) {
-			return;
-		}
-
-		const active = rotating.current.querySelector('.active') as HTMLElement;
-		const height = active?.getBoundingClientRect().height;
-		rotating.current.scrollTop = ( height * activeIndex ) + gap;
-	}
-
-	// The blocking of browser paint in layout effects prevents some CLS from width being applied to rotating title.
+	// The blocking of browser paint in layout effects prevents some CLS on a hard refresh from width being applied to the rotating title.
 	// To make the css transition work, the width can't be set explicitly.
 	useLayoutEffect(() => {
 		setWidthOfParent();
-		scrollToActive();
 	}, [activeIndex])
 
 	return (
