@@ -6,9 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -18,6 +16,8 @@ Route::resource('projects', ProjectsController::class);
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+    Route::post('/settings/store', [SettingsController::class, 'store'])->name('settings.store');
     
     Route::resource('projects', ProjectsController::class, ['only' => ['edit', 'destroy', 'store', 'update', 'create']]);
 });
