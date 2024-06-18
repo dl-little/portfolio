@@ -17,7 +17,6 @@ class DashboardController extends Controller
     public function index(): Response
     {
 		$projects = ProjectResource::collection( Project::all() );
-		$settings = SettingResource::collection( Setting::all() );
-        return Inertia::render('Dashboard', compact(['projects', 'settings']));
+        return Inertia::render('Dashboard', compact(['projects']));
     }
 }
