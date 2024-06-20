@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Spatie\Valuestore\Valuestore;
 
 class HomeController extends Controller
 {
@@ -14,6 +13,7 @@ class HomeController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Home');
+        $home_content = Valuestore::make(config_path('settings.json'))->allStartingWith('home');
+        return Inertia::render('Home', compact('home_content'));
     }
 }

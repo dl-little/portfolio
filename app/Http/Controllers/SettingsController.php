@@ -38,6 +38,6 @@ class SettingsController extends Controller
             $valuestore->put($key, $value);
         }
 
-        return redirect('/dashboard');
+        return redirect('/backofhouse')->with('message', 'Settings Updated.');
     }
 }

@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import { useEffect, useRef, useState, useLayoutEffect, useMemo } from "react";
 import styled from "styled-components";
 import classNames from 'classnames';
 import RenderIf from "@/Components/RenderIf";
+import { ISharedProps } from "@/Components/interfaces";
 
 const HomeContainer = styled.section`
 	display: flex;
@@ -66,31 +67,24 @@ const PauseButton = styled.button`
 	line-height: 1em;
 `
 
-// TODO: Make a setting for nouns
-const nouns = [
-	'full-stack developer',
-	'coder',
-	'former teacher',
-	'proactive communicator',
-	'React developer',
-	'capable person',
-	'PHP developer',
-	'documentation fiend',
-	'gap-bridger',
-	'chill hang',
-	'container-of-multitudes',
-	'credit-sharer',
-	'software engineer',
-	'WordPress developer',
-	'UI developer',
-	'writer',
-];
+interface IHomeContent extends ISharedProps {
+	home_content: {
+		home_big: string
+		home_little: string
+		home_nouns: string
+	}
+}
 
-const Home = () => {
+const splitNounArray = ( nouns: string ) => {
+	return nouns.split(',');
+}
+
+const Home:React.FC<IHomeContent> = ({ home_content }) => {
 	const rotating = useRef<HTMLElement | null>(null);
 	const [ activeIndex, setActiveIndex ] = useState(0);
 	const [ intervalId, setIntervalId ] = useState(0);
-	const gap = .1 * parseFloat( getComputedStyle( window.document.body ).fontSize );
+	const { home_nouns, home_big, home_little } = home_content;
+	const nouns = useMemo(() => splitNounArray( home_nouns ), []);
 
 	const handleClick = () => {
 		if ( intervalId > 0 ) {
@@ -140,8 +134,8 @@ const Home = () => {
 
 	return (
 		<HomeContainer id="home-container">
-			<p className="emphasis highlight accent">Hey, I'm Doug.</p>
-			<big>I build things on the web.</big>
+			<p className="emphasis highlight accent">{home_little}</p>
+			<big>{home_big}</big>
 			<Marquee>
 				I'm a
 				<Rotating className={classNames("emphasis box primary", {paused: intervalId === 0})} ref={rotating}>

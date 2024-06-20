@@ -149,9 +149,9 @@ const Dashboard: React.FC<IDashboard> = ({ auth, projects, values }) => {
                                 <tr>
                                     {Object.entries(values).map(([k, v]) => {
                                         return (
-                                            <TableCell key={k}>
+                                            <TableCellDescription key={k}>
                                                 {v}
-                                            </TableCell>
+                                            </TableCellDescription>
                                         )
                                     })}
                                 </tr>
