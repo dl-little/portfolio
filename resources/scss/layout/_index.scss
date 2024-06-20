@@ -21,6 +21,9 @@
 		content: "";
 		border-right: .2em solid $dark-blue;
 		border-left: .2em solid $dark-blue;
+		transition-property: width height left top;
+		transition-duration: .3s;
+		transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 		@include setFrame( $gap );
 		z-index: 1;
 	}
@@ -31,6 +34,9 @@
 		@include setBlur( $gap );
 
 		&::before, &::after {
+			transition-property: height width left;
+			transition-duration: .3s;
+			transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 			position: absolute;
 			content: "";
 			z-index: 2;

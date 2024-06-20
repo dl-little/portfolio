@@ -24,6 +24,9 @@ header#header {
   left: 0;
   top: 0;
   z-index: 2;
+  transition-property: left top;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   top: 0.9em;
   left: 0.9em;
 }
@@ -84,7 +87,10 @@ footer {
   font-size: 0.5em;
   position: fixed;
   writing-mode: vertical-rl;
-  bottom: 1.3em;
+  transition-property: bottom right;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+  bottom: 1.4em;
   right: 1.3em;
   color: #1F2933;
   font-weight: 700;
@@ -113,6 +119,9 @@ footer #footer-wrap {
   content: "";
   border-right: 0.2em solid #1F2933;
   border-left: 0.2em solid #1F2933;
+  transition-property: width height left top;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   width: calc(100% - 1.2em);
   height: calc(100% - 1.2em + 0.3em);
   left: 0.45em;
@@ -129,6 +138,9 @@ footer #footer-wrap {
   left: 0.45em;
 }
 #app main::before, #app main::after {
+  transition-property: height width left;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   position: absolute;
   content: "";
   z-index: 2;
@@ -198,7 +210,7 @@ footer #footer-wrap {
     margin-bottom: calc(2.7em + var(--scroll-offset, 0em));
   }
   #app footer {
-    bottom: 1.75em;
+    bottom: 1.85em;
     right: 1.75em;
   }
 }
@@ -226,7 +238,7 @@ footer #footer-wrap {
     margin-bottom: calc(3.6em + var(--scroll-offset, 0em));
   }
   #app footer {
-    bottom: 2.2em;
+    bottom: 2.3em;
     right: 2.2em;
   }
 }

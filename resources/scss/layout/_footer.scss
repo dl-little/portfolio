@@ -2,6 +2,9 @@ footer {
 	font-size: .5em;
 	position: fixed;
 	writing-mode: vertical-rl;
+	transition-property: bottom right;
+	transition-duration: .3s;
+	transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 	@include placeFooter( $gap );
 	color: $dark-blue;
 	font-weight: $bold;
