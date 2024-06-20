@@ -87,13 +87,6 @@ const Login: React.FC<ISharedProps> = ({ status, canResetPassword }) => {
                             Forgot your password?
                         </Link>
                     )}
-
-                        <Link
-                            href={route('register')}
-                        >
-                            Sign Up
-                        </Link>
-
                     <PrimaryButton disabled={processing}>
                         Log in
                     </PrimaryButton>
