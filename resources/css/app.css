@@ -24,7 +24,7 @@ header#header {
   left: 0;
   top: 0;
   z-index: 2;
-  transition-property: left top;
+  transition-property: left, top;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   top: 0.9em;
@@ -87,7 +87,7 @@ footer {
   font-size: 0.5em;
   position: fixed;
   writing-mode: vertical-rl;
-  transition-property: bottom right;
+  transition-property: bottom, right;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   bottom: 1.4em;
@@ -106,12 +106,15 @@ footer #footer-wrap {
   padding: 0;
 }
 
+html, body, #app {
+  height: 100%;
+  overflow: hidden;
+}
+
 #app {
-  height: 100vh;
   width: 100vw;
   box-sizing: border-box;
   background-color: #FAF9F0;
-  overflow: hidden;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 }
 #app::before {
@@ -119,7 +122,7 @@ footer #footer-wrap {
   content: "";
   border-right: 0.2em solid #1F2933;
   border-left: 0.2em solid #1F2933;
-  transition-property: width height left top;
+  transition-property: width, height, left, top;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   width: calc(100% - 1.2em);
@@ -138,7 +141,7 @@ footer #footer-wrap {
   left: 0.45em;
 }
 #app main::before, #app main::after {
-  transition-property: height width left;
+  transition-property: height, width, left;
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
   position: absolute;

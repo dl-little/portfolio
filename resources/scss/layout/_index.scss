@@ -8,12 +8,15 @@
 	padding: 0;
 }
 
+html, body, #app {
+	height: 100%;
+	overflow: hidden;
+}
+
 #app {
-	height: 100vh;
 	width: 100vw;
 	box-sizing: border-box;
 	background-color: $tertiary;
-	overflow: hidden;
 	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
 	&::before {
@@ -21,7 +24,7 @@
 		content: "";
 		border-right: .2em solid $dark-blue;
 		border-left: .2em solid $dark-blue;
-		transition-property: width height left top;
+		transition-property: width, height, left, top;
 		transition-duration: .3s;
 		transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 		@include setFrame( $gap );
@@ -34,7 +37,7 @@
 		@include setBlur( $gap );
 
 		&::before, &::after {
-			transition-property: height width left;
+			transition-property: height, width, left;
 			transition-duration: .3s;
 			transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 			position: absolute;

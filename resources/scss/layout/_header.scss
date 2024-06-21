@@ -3,7 +3,7 @@ header#header {
 	left: 0;
 	top: 0;
 	z-index: 2;
-	transition-property: left top;
+	transition-property: left, top;
 	transition-duration: .3s;
 	transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 	@include placeHeader( $gap );

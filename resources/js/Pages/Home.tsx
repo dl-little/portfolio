@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useLayoutEffect, useMemo } from "react";
 import styled from "styled-components";
 import classNames from 'classnames';
-import RenderIf from "@/Components/RenderIf";
+import StartStopIcon from "@/Components/StartStopIcon";
 import { ISharedProps } from "@/Components/interfaces";
 
 const HomeContainer = styled.section`
@@ -16,7 +16,7 @@ const HomeContainer = styled.section`
 	& > * {
 		display: block;
 	}
-`
+`;
 
 const Marquee = styled.section`
 	display: flex;
@@ -63,9 +63,25 @@ const RotatingTitle = styled.span`
 
 const PauseButton = styled.button`
 	cursor: pointer;
-	width: 15px;
 	line-height: 1em;
-`
+	font-family: inherit; /* For all browsers */
+	font-size: 100%; /* For all browsers */
+	margin: 0; /* Firefox and Safari have margin */
+	overflow: visible; /* Edge hides overflow */
+	text-transform: none; /* Firefox inherits text-transform */
+	-webkit-appearance: button; /* Safari otherwise prevents some styles */
+	border: 0;
+	background: 0;
+
+	&::-moz-focus-inner {
+		border-style: none;
+		padding: 0;
+	}
+
+	&:-moz-focusring {
+		outline: 1px dotted ButtonText;
+	}
+`;
 
 interface IHomeContent extends ISharedProps {
 	home_content: {
@@ -151,12 +167,7 @@ const Home:React.FC<IHomeContent> = ({ home_content }) => {
 					<p className="screen-reader-text">
 						{`${intervalId > 0 ? 'Stop' : 'Start'} animation`}
 					</p>
-					<RenderIf isTrue={intervalId > 0}>
-						&#x23F8;
-					</RenderIf>
-					<RenderIf isTrue={intervalId === 0}>
-						&#x23F5;
-					</RenderIf>
+					<StartStopIcon paused={intervalId === 0} />
 				</PauseButton>
 			</Marquee>
 		</HomeContainer>
