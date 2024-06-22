@@ -83,14 +83,9 @@ const Index: React.FC<IProjectsIndex> = ({ projects }) => {
                             </RenderIf>
                             <Links>
                                 <big>
-                                    <RenderIf isTrue={project.is_hosted}>
-                                        <Link className='inertia-link' href={route('projects.show', project.id)}>
-                                            {project.title}
-                                        </Link>
-                                    </RenderIf>
-                                    <RenderIf isTrue={!project.is_hosted}>
+                                    <Link className='inertia-link' href={route('projects.show', project.id)}>
                                         {project.title}
-                                    </RenderIf>
+                                    </Link>
                                 </big>
                                 <RenderIf isTrue={!!project.github_url}>
                                     <a href={project.github_url} className="icon-link" title={`Github link for ${project.title}`}>

@@ -9,7 +9,9 @@ import Layout from './Layouts/Layout';
 const appName = import.meta.env.VITE_APP_NAME || 'Doug Little, Full-Stack Developer';
 
 const setupPageLayout = (module: any, name: string) => {
-    module.default.layout ??= (p: any) => <Layout children={p} title={name} />
+    const strippedOfSlashes = /^([^\/])+/.exec(name)?.[0];
+    console.log(module);
+    module.default.layout ??= (p: any) => <Layout children={p} title={strippedOfSlashes} />
 }
 
 createInertiaApp({

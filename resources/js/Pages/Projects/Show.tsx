@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { ISharedProps } from '@/Components/interfaces';
 import { IProject } from './Index';
 import styled from "styled-components";
@@ -6,6 +7,7 @@ import RenderIf from '@/Components/RenderIf';
 import GHLogo from '@/Components/logos/GHLogo';
 
 import variables from '../../../scss/abstracts/_shared.module.scss';
+import useDynamicImport from '@/Hooks/useDynamicImport';
 const { gap, secondary, contrast, tabletBreak, desktopBreak } = variables;
 
 const DetailsContainer = styled.section`
@@ -16,14 +18,13 @@ const DetailsContainer = styled.section`
 	& > *:not(:first-child) {
 		margin-block-start: ${gap};
 	}
-`
+`;
 
 const ProjectImage = styled.img`
 	display: block;
 	height: 75px;
 	width: 75px;
 	object-fit: cover;
-	border: .2em solid ${secondary};
 
 	@media( min-width: ${tabletBreak} ) {
         width: 150px;
@@ -41,7 +42,8 @@ interface IProjectsDetails extends ISharedProps {
 }
 
 const Show: React.FC<IProjectsDetails> = ({ project }) => {
-	const { description, github_url, id, image, keywords, title } = project;
+	const { description, github_url, id, image, keywords, title, is_hosted } = project;
+	const projectComponent = useDynamicImport('Wrapper', {title: title});
 	
     return (
 		<DetailsContainer>
@@ -55,7 +57,12 @@ const Show: React.FC<IProjectsDetails> = ({ project }) => {
 					/>
 				</a>
 			</RenderIf>
-			<ProjectImage src={`/storage/${image}`} />
+			<RenderIf isTrue={is_hosted}>
+				{projectComponent}
+			</RenderIf>
+			<RenderIf isTrue={!is_hosted}>
+				<ProjectImage src={`/storage/${image}`} />
+			</RenderIf>
 			<RenderIf isTrue={!!description}>
 				<p>{description}</p>
 			</RenderIf>
