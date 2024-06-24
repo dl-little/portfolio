@@ -107,7 +107,7 @@ const Home:React.FC<IHomeContent> = ({ home_content }) => {
 			clearInterval(intervalId);
 			setIntervalId(0);
 		} else {
-			{/* @ts-expect-error: It is insisting on the type being NodeJS.Timeout */}
+			{/* @ts-expect-error: TODO: resolve. It is insisting on the type being NodeJS.Timeout */}
 			const interval: number = setInterval(changeTitle, 2500) as number;
 			setIntervalId(interval);
 		}
@@ -124,7 +124,7 @@ const Home:React.FC<IHomeContent> = ({ home_content }) => {
 	}
 
 	useEffect(() => {
-		{/* @ts-expect-error: It is insisting on the type being NodeJS.Timeout */}
+		{/* @ts-expect-error: TODO: resolve. It is insisting on the type being NodeJS.Timeout */}
 		const interval: number = setInterval(changeTitle, 2500) as number;
 		setIntervalId(interval);
 	

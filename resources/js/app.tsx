@@ -10,7 +10,6 @@ const appName = import.meta.env.VITE_APP_NAME || 'Doug Little, Full-Stack Develo
 
 const setupPageLayout = (module: any, name: string) => {
     const strippedOfSlashes = /^([^\/])+/.exec(name)?.[0];
-    console.log(module);
     module.default.layout ??= (p: any) => <Layout children={p} title={strippedOfSlashes} />
 }
 
