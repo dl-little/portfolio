@@ -1,8 +1,10 @@
 import useScrollOffset from '@/Hooks/useScrollOffset';
-import { PropsWithChildren, useRef, useLayoutEffect, useCallback } from 'react';
+import { PropsWithChildren, useRef, useLayoutEffect, useCallback, useContext } from 'react';
+import { ArticleContext } from '@/Layouts/ArticleContextProvider';
 
 const Article: React.FC<PropsWithChildren> = ({children}) => {
-	const ref = useRef<HTMLElement | null>(null);
+	const articleContext = useContext(ArticleContext);
+	const ref = articleContext.articleRef;
 	const { setBodyAttribute } = useScrollOffset(ref);
 
 	useLayoutEffect(() => {
