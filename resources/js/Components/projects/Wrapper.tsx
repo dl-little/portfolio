@@ -10,11 +10,9 @@ const Wrapper:React.FC<IWrapper> = ({ title }) => {
 	const projectComponent = useDynamicImport( title, {});
 
 	return (
-		<>
-			<RenderIf isTrue={!!projectComponent}>
-				{projectComponent}
-			</RenderIf>
-		</>
+		<RenderIf isTrue={!!projectComponent}>
+			{projectComponent}
+		</RenderIf>
 	)
 }
 

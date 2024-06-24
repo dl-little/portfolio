@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
 import { ISharedProps } from '@/Components/interfaces';
 import { IProject } from './Index';
 import styled from "styled-components";
 import Heading from '@/Components/Heading';
 import RenderIf from '@/Components/RenderIf';
 import GHLogo from '@/Components/logos/GHLogo';
+import useDynamicImport from '@/Hooks/useDynamicImport';
 
 import variables from '../../../scss/abstracts/_shared.module.scss';
-import useDynamicImport from '@/Hooks/useDynamicImport';
 const { gap, secondary, contrast, tabletBreak, desktopBreak } = variables;
 
 const DetailsContainer = styled.section`
+	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: flex-end;
@@ -42,7 +42,7 @@ interface IProjectsDetails extends ISharedProps {
 }
 
 const Show: React.FC<IProjectsDetails> = ({ project }) => {
-	const { description, github_url, id, image, keywords, title, is_hosted } = project;
+	const { description, github_url, image, title, is_hosted } = project;
 	const projectComponent = useDynamicImport('Wrapper', {title: title});
 	
     return (
@@ -58,7 +58,9 @@ const Show: React.FC<IProjectsDetails> = ({ project }) => {
 				</a>
 			</RenderIf>
 			<RenderIf isTrue={is_hosted}>
-				{projectComponent}
+				<section style={{minHeight: '50px', width: '100%'}}>
+					{projectComponent}
+				</section>
 			</RenderIf>
 			<RenderIf isTrue={!is_hosted}>
 				<ProjectImage src={`/storage/${image}`} />
