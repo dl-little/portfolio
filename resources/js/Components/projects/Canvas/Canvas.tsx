@@ -1,13 +1,24 @@
 import { useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { drawGrid } from './helpers';
+import variables from '../../../../scss/abstracts/_shared.module.scss';
+const { contrast, tabletBreak } = variables;
+
+const Vas = styled.canvas`
+	// display: none;
+	// @media( min-width: ${tabletBreak} ) {
+	// 	display: inline;
+	// }
+`;
 
 interface ICanvas {
 	width: number
 	height: number
+	columns: number
 }
 
-// Updated a few things, but this is the reference:
-// https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
 const Canvas: React.FC<ICanvas> = (props) => {
+	const { columns, width, height } = props;
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
 	useEffect(() => {
@@ -23,14 +34,15 @@ const Canvas: React.FC<ICanvas> = (props) => {
 			return;
 		}
 
-		// Our first draw
 		context.fillStyle = '#87ceeb';
 		context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-	
-	  }, [])
+
+		drawGrid(context, width, columns);
+
+	}, [])
 
 	return (
-		<canvas ref={canvasRef} {...props} />
+		<Vas ref={canvasRef} width={width} height={height} />
 	)
 }
 
