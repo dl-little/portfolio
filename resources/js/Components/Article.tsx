@@ -1,5 +1,5 @@
 import useScrollOffset from '@/Hooks/useScrollOffset';
-import { PropsWithChildren, useRef, useLayoutEffect, useCallback, useContext } from 'react';
+import { PropsWithChildren, useLayoutEffect, useContext } from 'react';
 import { ArticleContext } from '@/Layouts/ArticleContextProvider';
 
 const Article: React.FC<PropsWithChildren> = ({children}) => {
