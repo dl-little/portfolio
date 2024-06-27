@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { drawGrid } from './helpers';
 import variables from '../../../../scss/abstracts/_shared.module.scss';
+import { drawGrid } from './helpers';
 const { tabletBreak } = variables;
 
 const Vas = styled.canvas<{width: number, height: number}>`
