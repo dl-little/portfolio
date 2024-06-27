@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { drawGrid } from './helpers';
 import variables from '../../../../scss/abstracts/_shared.module.scss';
 const { contrast, tabletBreak } = variables;
 
@@ -36,8 +35,6 @@ const Canvas: React.FC<ICanvas> = (props) => {
 
 		context.fillStyle = '#87ceeb';
 		context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-
-		drawGrid(context, width, columns);
 
 	}, [])
 
