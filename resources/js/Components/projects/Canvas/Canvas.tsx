@@ -2,13 +2,17 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { drawGrid } from './helpers';
 import variables from '../../../../scss/abstracts/_shared.module.scss';
-const { contrast, tabletBreak } = variables;
+const { tabletBreak } = variables;
 
-const Vas = styled.canvas`
-	// display: none;
-	// @media( min-width: ${tabletBreak} ) {
-	// 	display: inline;
-	// }
+const Vas = styled.canvas<{width: number, height: number}>`
+	max-width: 100%;
+	image-rendering: pixelated;
+
+	@media (min-width: ${tabletBreak}) {
+		width: calc(${props => props.width}px * 2);
+		height: calc(${props => props.height}px * 2);
+		object-fit: contain;
+	}
 `;
 
 interface ICanvas {
@@ -36,8 +40,9 @@ const Canvas: React.FC<ICanvas> = (props) => {
 
 		context.fillStyle = '#87ceeb';
 		context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+		context.save();
 
-		drawGrid(context, width, columns);
+		drawGrid(context, width, height, columns);
 
 	}, [])
 

@@ -1,9 +1,10 @@
-import Canvas from "./Canvas";
+import Canvas from "./Canvas/Canvas";
 
 const Clouds:React.FC = () => {
+
 	return (
 		<>
-			<Canvas width={150} height={150} />
+			<Canvas width={256} height={128} columns={32} />
 		</>
 	)
 }
