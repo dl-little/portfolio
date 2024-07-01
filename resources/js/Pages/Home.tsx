@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useLayoutEffect, useMemo } from "react";
 import styled from "styled-components";
 import classNames from 'classnames';
-import StartStopIcon from "@/Components/StartStopIcon";
+import PauseButton from "@/Components/PauseButton";
 import { ISharedProps } from "@/Components/interfaces";
 
 const HomeContainer = styled.section`
@@ -58,28 +58,6 @@ const RotatingTitle = styled.span`
 	&.active {
 		display: block;
 		max-width: fit-content;
-	}
-`;
-
-const PauseButton = styled.button`
-	cursor: pointer;
-	line-height: 1em;
-	font-family: inherit; /* For all browsers */
-	font-size: 100%; /* For all browsers */
-	margin: 0; /* Firefox and Safari have margin */
-	overflow: visible; /* Edge hides overflow */
-	text-transform: none; /* Firefox inherits text-transform */
-	-webkit-appearance: button; /* Safari otherwise prevents some styles */
-	border: 0;
-	background: 0;
-
-	&::-moz-focus-inner {
-		border-style: none;
-		padding: 0;
-	}
-
-	&:-moz-focusring {
-		outline: 1px dotted ButtonText;
 	}
 `;
 
@@ -163,12 +141,7 @@ const Home:React.FC<IHomeContent> = ({ home_content }) => {
 						)
 					})}
 				</Rotating>
-				<PauseButton onClick={handleClick} data-action={ intervalId > 0 ? 'stop' : 'start'}>
-					<p className="screen-reader-text">
-						{`${intervalId > 0 ? 'Stop' : 'Start'} animation`}
-					</p>
-					<StartStopIcon paused={intervalId === 0} />
-				</PauseButton>
+				<PauseButton onClick={handleClick} paused={intervalId === 0} />
 			</Marquee>
 		</HomeContainer>
 	);

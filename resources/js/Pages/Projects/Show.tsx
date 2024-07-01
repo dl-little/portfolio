@@ -14,6 +14,7 @@ const DetailsContainer = styled.section`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: flex-end;
+	position: relative;
 
 	& > *:not(:first-child) {
 		margin-block-start: ${gap};
@@ -58,9 +59,7 @@ const Show: React.FC<IProjectsDetails> = ({ project }) => {
 				</a>
 			</RenderIf>
 			<RenderIf isTrue={is_hosted}>
-				<section style={{minHeight: '50px', width: '100%'}}>
-					{projectComponent}
-				</section>
+				{projectComponent}
 			</RenderIf>
 			<RenderIf isTrue={!is_hosted}>
 				<ProjectImage src={`/storage/${image}`} />
