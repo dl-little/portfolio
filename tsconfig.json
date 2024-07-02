@@ -12,7 +12,9 @@
 		"paths": {
 			"@/*": ["resources/js/*"],
 			"ziggy-js": ["./vendor/tightenco/ziggy"]
-		}
+		},
+		"resolveJsonModule": true,
+		"esModuleInterop": true
 	},
 	"include": ["resources/js/**/*"]
 }

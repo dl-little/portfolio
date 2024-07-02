@@ -1,0 +1,104 @@
+{
+	"volume": {
+		"controlGroups": [
+			{
+				"name": "mute",
+				"id": "mute",
+				"type": "checkbox"
+			},
+			{
+				"name": "gain",
+				"id": "gain",
+				"type": "range",
+				"defaultValue": 50,
+				"min": 0,
+				"max": 100
+			},
+			{
+				"name": "decay",
+				"id": "decay",
+				"type": "range",
+				"defaultValue": 5,
+				"min": 0,
+				"max": 10,
+				"step": 0.01
+			}
+		]
+	},
+	"waves": {
+		"controlGroups": [
+			{
+				"name": "wave form",
+				"id": "waveForm",
+				"type": "select",
+				"defaultValue": "sine",
+				"options": [
+					"sine",
+					"square",
+					"sawtooth",
+					"triangle"
+				]
+			}
+		]
+	},
+	"octave": {
+		"controlGroups": [
+			{
+				"name": "octave",
+				"id": "octave",
+				"type": "radio",
+				"defaultValue": "middle",
+				"options": [
+					"low",
+					"middle",
+					"high"
+				]
+			}
+		]
+	},
+	"display": {
+		"controlGroups": [
+			{
+				"name": "show keyboard letters",
+				"id": "keyboardLetters",
+				"type": "checkbox"
+			}
+		]
+	},
+	"filters": {
+		"controlGroups": [
+			{
+				"name": "toggle low-pass",
+				"id": "lowpass",
+				"type": "checkbox"
+			},
+			{
+				"name": "low-pass frequency",
+				"id": "lowpassFrequency",
+				"type": "range",
+				"defaultValue": 80,
+				"min": 80,
+				"max": 1000,
+				"step": 5
+			},
+			{
+				"name": "low-pass gain",
+				"id": "lowpassGain",
+				"type": "range",
+				"defaultValue": 0,
+				"min": 0,
+				"max": 1000,
+				"step": 10
+			}
+		]
+	},
+	"visualization": {
+		"controlGroups": [
+			{
+				"name": "visualization",
+				"id": "visualization",
+				"type": "canvas"
+			}
+		]
+	}
+}
