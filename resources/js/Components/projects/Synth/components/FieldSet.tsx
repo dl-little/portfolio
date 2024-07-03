@@ -54,7 +54,7 @@ interface IFieldSet extends PropsWithChildren{
 const FieldSet: React.FC<IFieldSet> = (props) => {
 	const { title, controlGroups } = props;
 	/* @ts-expect-error: TODO: Provide default in definition of context. */
-	const { setOctave, setKeyboardLetters, setMute, setLowpass, setWaveForm, setLowpassFrequency, setLowpassGain, setGain, setDecay, mute } = useContext(SynthContext);
+	const { setOctave, setKeyboardLetters, setMute, setLowpass, setWaveForm, setLowpassFrequency, setLowpassGain, setGain, setDecay, setDecayLength } = useContext(SynthContext);
 
 	const handleRadioChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		setOctave(e.target.id);

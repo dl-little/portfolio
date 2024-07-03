@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import triggerData from '../triggers.json';
+import useAudioContext from "../useAudioContext";
 
 /* @ts-expect-error: TODO: Provide default */
 export const SynthContext = createContext();
@@ -10,9 +12,69 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 	const [lowpass, setLowpass] = useState<boolean>(false);
 	const [waveForm, setWaveForm] = useState<string>('sine');
 	const [lowpassFrequency, setLowpassFrequency] = useState<number>(80);
-	const [lowpassGain, setLowpassGain] = useState<number>(0);
 	const [gain, setGain] = useState<number>(50);
 	const [decay, setDecay] = useState<number>(5);
+	const [activeKeys, setActiveKeys] = useState<(keyof typeof triggerData)[]>([]);
+	const [synthActive, setSynthActive] = useState(false);
+
+	const triggerKeys = Object.keys(triggerData) as (keyof typeof triggerData)[];
+	const audioContext = useAudioContext({
+		octave,
+		mute,
+		lowpass,
+		waveForm,
+		lowpassFrequency,
+		gain,
+		decay,
+		activeKeys
+	});
+
+	const resumeContext = () => {
+		setSynthActive(true);
+		audioContext.resume();
+	}
+
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+
+			if ( ! synthActive ) {
+				resumeContext();
+			}
+
+			if (
+				/* @ts-expect-error: we are checking if the pressed key is a trigger */
+				! triggerKeys.includes(e.key)
+				/* @ts-expect-error: we are checking if the pressed key is a trigger */
+				|| activeKeys.includes(e.key)
+			) {
+				return;
+			}
+
+			/* @ts-expect-error: we are checking if the pressed key is a trigger */
+			setActiveKeys(activeKeys => [...activeKeys, e.key]);
+		}
+
+		const handleKeyUp = (e: KeyboardEvent) => {
+			if (
+				/* @ts-expect-error: we are checking if the pressed key is a trigger */
+				! triggerKeys.includes(e.key)
+				/* @ts-expect-error: we are checking if the pressed key is a trigger */
+				|| ! activeKeys.includes(e.key)
+			) {
+				return;
+			}
+
+			setActiveKeys(activeKeys.filter(key => key !== e.key));
+		}
+
+		document.addEventListener('keydown', handleKeyDown);
+		document.addEventListener('keyup', handleKeyUp);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+			document.removeEventListener('keyup', handleKeyUp);
+		}
+	}, [activeKeys])
 
 	return (
 		<SynthContext.Provider
@@ -29,12 +91,11 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 			setWaveForm,
 			lowpassFrequency,
 			setLowpassFrequency,
-			lowpassGain,
-			setLowpassGain,
 			gain,
 			setGain,
 			decay,
-			setDecay
+			setDecay,
+			activeKeys
 		}} >
 			{children}
 		</SynthContext.Provider>
