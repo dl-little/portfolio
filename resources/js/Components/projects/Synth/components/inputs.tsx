@@ -10,6 +10,8 @@ export interface IInput {
 	defaultValue?: string | number
 	onChange?: ChangeEventHandler<HTMLInputElement>
 	onSelectchange?: ChangeEventHandler<HTMLSelectElement>
+	value?: "low" | "middle" | "high"
+	description?: string
 }
 
 export const Checkbox: React.FC<IInput> = (props) => {
@@ -33,17 +35,18 @@ export const Range: React.FC<IInput> = (props) => {
 }
 
 export const Radio: React.FC<IInput> = (props) => {
-	const { id, options, defaultValue, onChange } = props;
+	const { id, options, onChange, value, description } = props;
 	return (
 		<>
 			{options?.map(option => {
 				return (
-					<span className={id} key={option}>
+					<span aria-describedby="radio-description" className={id} key={option}>
 						<label htmlFor={option}>{option}:</label>
-						<input name={id} type="radio" id={option} defaultChecked={defaultValue === option} onChange={onChange} />
+						<input name={id} type="radio" id={option} checked={option === value} onChange={onChange} />
 					</span>
 				)
 			})}
+			<p id="radio-description" className="screen-reader-text">{description}</p>
 		</>
 	)
 }

@@ -44,6 +44,7 @@ interface IControlGroup {
 	max?: number
 	step?: number
 	defaultValue?: string | number
+	description?: string
 }
 
 interface IFieldSet extends PropsWithChildren{
@@ -54,7 +55,7 @@ interface IFieldSet extends PropsWithChildren{
 const FieldSet: React.FC<IFieldSet> = (props) => {
 	const { title, controlGroups } = props;
 	/* @ts-expect-error: TODO: Provide default in definition of context. */
-	const { setOctave, setKeyboardLetters, setMute, setLowpass, setWaveForm, setLowpassFrequency, setLowpassGain, setGain, setDecay, setDecayLength } = useContext(SynthContext);
+	const { setOctave, setKeyboardLetters, setMute, setLowpass, setWaveForm, setLowpassFrequency, setLowpassGain, setGain, setDecay, octave } = useContext(SynthContext);
 
 	const handleRadioChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		setOctave(e.target.id);
@@ -130,7 +131,8 @@ const FieldSet: React.FC<IFieldSet> = (props) => {
 							props = {
 								...props,
 								options: group.options,
-								defaultValue: group.defaultValue,
+								description: group.description,
+								value: octave,
 								onChange: handleRadioChange
 							}
 							break;
