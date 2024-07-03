@@ -41,6 +41,20 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 				resumeContext();
 			}
 
+			if ( ['z', 'x', 'c'].includes(e.key) ) {
+				switch(e.key) {
+					case 'z':
+						setOctave('low');
+						break;
+					case 'c':
+						setOctave('high');
+						break;
+					default:
+						setOctave('middle');
+				}
+				return;
+			}
+
 			if (
 				/* @ts-expect-error: we are checking if the pressed key is a trigger */
 				! triggerKeys.includes(e.key)
