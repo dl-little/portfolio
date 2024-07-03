@@ -34,22 +34,19 @@ const useAudioContext = (props: IAudioContextProps) => {
 		return new window.AudioContext();
 	}, []);
 
+	const [masterGain, setMasterGain] = useState<GainNode | null>(null);
 	const [biFilter, setBiFilter] = useState<BiquadFilterNode | null>(null);
 	const [openedOscs, setOpenedOscs] = useState<IOsc[]>([]);
 
 	const changeGain = () => {
-		openedOscs.forEach(o => {
-			o.gainNode.gain.setValueAtTime(mute ? 0 : (gain/2)/100, audioContext.currentTime);
-			if (mute) {
-				return;
-			}
-			o.gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + decay);
-		})
+		masterGain?.gain.setValueAtTime(mute ? 0 : (gain/2)/100, audioContext.currentTime);
 	}
 
-	useEffect(() => {
-		changeGain();
-	}, [gain, mute])
+	const createMasterGain = () => {
+		const node = audioContext.createGain();
+		node.gain.setValueAtTime((gain/2)/100, audioContext.currentTime);
+		setMasterGain(node);
+	}
 
 	const createBiFilter = () => {
 		const filter = audioContext.createBiquadFilter();
@@ -60,10 +57,6 @@ const useAudioContext = (props: IAudioContextProps) => {
 	const changeFilter = () => {
 		biFilter?.frequency.setValueAtTime(! lowpass ? 350 : lowpassFrequency, audioContext.currentTime);
 	}
-
-	useEffect(() => {
-		changeFilter();
-	}, [lowpass, lowpassFrequency])
 
 	const openOsc = (
 		key: keyof typeof triggerData,
@@ -76,8 +69,10 @@ const useAudioContext = (props: IAudioContextProps) => {
 		osc.start();
 
 		const gainNode = audioContext.createGain();
-		gainNode.gain.setValueAtTime(mute ? 0 : (gain/2)/100, audioContext.currentTime);
-		gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + decay);
+
+		if ( decay < 10 ) {
+			gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + decay);
+		}
 
 		setOpenedOscs(openedOscs => [...openedOscs, {
 			trigger: key,
@@ -86,16 +81,15 @@ const useAudioContext = (props: IAudioContextProps) => {
 		}]);
 	}
 
-	const makeConnections = () => {
-		if ( ! biFilter ) {
-			return;
-		}
-		
+	const connectGainNodes = () => {		
 		openedOscs.forEach(o => {
 			o.oscNode.connect(o.gainNode);
-		 	o.gainNode.connect(biFilter);
+		 	o.gainNode.connect(masterGain || audioContext.destination);
 		})
+	}
 
+	const makeConnections = () => {
+		masterGain?.connect(biFilter || audioContext.destination);
 		biFilter?.connect(audioContext.destination);
 	}
 
@@ -107,12 +101,25 @@ const useAudioContext = (props: IAudioContextProps) => {
 	}
 
 	useEffect(() => {
+		changeFilter();
+	}, [lowpass, lowpassFrequency])
+
+	useEffect(() => {
+		changeGain();
+	}, [gain, mute])
+
+	useEffect(() => {
 		createBiFilter();
+		createMasterGain();
 	}, [])
 
 	useEffect(() => {
+		connectGainNodes();
+	}, [openedOscs])
+
+	useEffect(() => {
 		makeConnections();
-	}, [biFilter, openedOscs])
+	}, [biFilter, masterGain])
 
 	useEffect(() => {
 		// If osc array contains a key that is not an active key, close osc.
