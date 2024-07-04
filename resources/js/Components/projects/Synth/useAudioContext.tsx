@@ -34,6 +34,7 @@ const useAudioContext = (props: IAudioContextProps) => {
 		return new window.AudioContext();
 	}, []);
 
+	const [analyser, setAnalyser] = useState<AnalyserNode | null>(null);
 	const [masterGain, setMasterGain] = useState<GainNode | null>(null);
 	const [biFilter, setBiFilter] = useState<BiquadFilterNode | null>(null);
 	const [openedOscs, setOpenedOscs] = useState<IOsc[]>([]);
@@ -52,6 +53,11 @@ const useAudioContext = (props: IAudioContextProps) => {
 		const filter = audioContext.createBiquadFilter();
 		filter.type = "lowpass";
 		setBiFilter(filter);
+	}
+
+	const createAnalyser = () => {
+		const node = audioContext.createAnalyser();
+		setAnalyser(node);
 	}
 
 	const changeFilter = () => {
@@ -81,7 +87,7 @@ const useAudioContext = (props: IAudioContextProps) => {
 		}]);
 	}
 
-	const connectGainNodes = () => {		
+	const connectGainNodes = () => {
 		openedOscs.forEach(o => {
 			o.oscNode.connect(o.gainNode);
 		 	o.gainNode.connect(masterGain || audioContext.destination);
@@ -90,7 +96,8 @@ const useAudioContext = (props: IAudioContextProps) => {
 
 	const makeConnections = () => {
 		masterGain?.connect(biFilter || audioContext.destination);
-		biFilter?.connect(audioContext.destination);
+		biFilter?.connect(analyser || audioContext.destination);
+		analyser?.connect(audioContext.destination);
 	}
 
 	const closeOsc = (osc: IOsc) => {
@@ -111,6 +118,7 @@ const useAudioContext = (props: IAudioContextProps) => {
 	useEffect(() => {
 		createBiFilter();
 		createMasterGain();
+		createAnalyser();
 	}, [])
 
 	useEffect(() => {
@@ -119,7 +127,7 @@ const useAudioContext = (props: IAudioContextProps) => {
 
 	useEffect(() => {
 		makeConnections();
-	}, [biFilter, masterGain])
+	}, [analyser])
 
 	useEffect(() => {
 		// If osc array contains a key that is not an active key, close osc.
@@ -149,7 +157,7 @@ const useAudioContext = (props: IAudioContextProps) => {
 		})
 	}, [activeKeys, octave, waveForm])
 
-	return audioContext;
+	return {audioContext, analyser};
 }
 
 export default useAudioContext;

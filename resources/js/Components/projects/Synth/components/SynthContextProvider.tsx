@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, RefObject } from "react";
 import triggerData from '../triggers.json';
 import useAudioContext from "../useAudioContext";
 
@@ -16,9 +16,10 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 	const [decay, setDecay] = useState<number>(5);
 	const [activeKeys, setActiveKeys] = useState<(keyof typeof triggerData)[]>([]);
 	const [synthActive, setSynthActive] = useState(false);
+	const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
 
 	const triggerKeys = Object.keys(triggerData) as (keyof typeof triggerData)[];
-	const audioContext = useAudioContext({
+	const {audioContext, analyser} = useAudioContext({
 		octave,
 		mute,
 		lowpass,
@@ -33,6 +34,59 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 		setSynthActive(true);
 		audioContext.resume();
 	}
+
+	useEffect(() => {
+		if ( ! canvas ) {
+			return;
+		}
+	
+		const canvasContext = canvas.getContext('2d');
+
+		if ( ! canvasContext || ! analyser ) {
+			return;
+		}
+
+		const bufferLength = analyser.frequencyBinCount;
+		const dataArray = new Uint8Array(bufferLength);
+
+		const draw = () => {
+			analyser.getByteTimeDomainData(dataArray);
+			canvasContext.fillStyle = 'rgb(200, 200, 200)';
+			canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+
+			canvasContext.lineWidth = 2;
+			canvasContext.strokeStyle = 'rgb(0, 0, 0)';
+			canvasContext.beginPath();
+
+			const sliceWidth = canvas.width * 1.0 / bufferLength;
+			let x = 0;
+
+			for( let i = 0; i < bufferLength; i++ ) {
+
+				let v = dataArray[i] / 128.0;
+				let y = v * canvas.height/2;
+
+				if(i === 0) {
+					canvasContext.moveTo(x, y);
+				} else {
+					canvasContext.lineTo(x, y);
+				}
+
+				x += sliceWidth;
+			}
+
+			canvasContext.lineTo(canvas.width, canvas.height/2);
+			canvasContext.stroke();
+
+			// debounce the animation frames.
+			setTimeout(() => {
+				requestAnimationFrame(draw);
+			}, 300)
+		}
+
+		draw();
+
+	}, [activeKeys, canvas])
 
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
@@ -109,7 +163,8 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 			setGain,
 			decay,
 			setDecay,
-			activeKeys
+			activeKeys,
+			setCanvas
 		}} >
 			{children}
 		</SynthContext.Provider>

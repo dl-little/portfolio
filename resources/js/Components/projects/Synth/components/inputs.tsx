@@ -1,4 +1,5 @@
-import { ChangeEventHandler } from "react"
+import { ChangeEventHandler, useContext, useEffect, useRef } from "react"
+import { SynthContext } from "./SynthContextProvider"
 
 export interface IInput {
 	id: string
@@ -71,7 +72,22 @@ export const Select: React.FC<IInput> = (props) => {
 
 export const Canvas: React.FC<IInput> = (props) => {
 	const { id } = props;
+	const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+	/* @ts-expect-error: TODO: Provide default in definition of context. */
+	const { setCanvas } = useContext(SynthContext);
+
+	useEffect(() => {
+		if ( ! canvasRef.current ) {
+			return;
+		}
+
+		const canvas = canvasRef.current;
+		setCanvas(canvas);
+
+	}, [canvasRef])
+
 	return (
-		<canvas id={id} />
+		<canvas ref={canvasRef} id={id} />
 	)
 }
