@@ -14,6 +14,8 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::resource('projects', ProjectsController::class);
 
+Route::get('/projects/{project:slug}', [ProjectsController::class, 'show'])->name('projects.show');
+
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::get('/backofhouse', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');

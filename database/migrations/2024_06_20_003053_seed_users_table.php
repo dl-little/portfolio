@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        User::where('email', config('app.admin_email'))->delete();
     }
 };

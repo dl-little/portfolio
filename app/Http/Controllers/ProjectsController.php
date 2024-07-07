@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Http\Resources\ProjectResource;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
 {
@@ -84,6 +85,7 @@ class ProjectsController extends Controller
         Project::create([
             'title' => $request->title,
             'image' => $image,
+            'slug'  => Str::slug($request->title),
             'github_url' => $request->github_url,
             'keywords' => $request->keywords,
             'description' => $request->description,
@@ -116,6 +118,7 @@ class ProjectsController extends Controller
         $project->update([
             'title' => $request->title,
             'image' => $image,
+            'slug' => Str::slug($request->title),
             'keywords' => $request->keywords,
             'description' => $request->description,
             'github_url' => $request->github_url,
