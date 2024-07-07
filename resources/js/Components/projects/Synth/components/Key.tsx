@@ -6,6 +6,8 @@ interface IKey {
 	trigger: string
 	keyboardLetters: boolean
 	active: boolean
+	mouseDown: (e: any) => void
+	mouseUp: (e: any) => void
 }
 
 const KeyButton = styled.button<{className: string, value: boolean}>`
@@ -25,12 +27,17 @@ const KeyButton = styled.button<{className: string, value: boolean}>`
 	padding: 0 0 2px 2px;
 `;
 
-const Key: React.FC<IKey> = ({color, trigger, keyboardLetters, active}) => {
+const Key: React.FC<IKey> = ({color, trigger, keyboardLetters, active, mouseDown, mouseUp}) => {
 
 	return (
 		<KeyButton
 			value={active}
 			className={color}
+			data-trigger={trigger}
+			onMouseDown={mouseDown}
+			onMouseUp={mouseUp}
+			onTouchStart={mouseDown}
+			onTouchEnd={mouseUp}
 		>
 			<RenderIf isTrue={keyboardLetters}>
 				{trigger}

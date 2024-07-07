@@ -56,6 +56,7 @@ const Links = styled.span`
 export interface IProject {
     description?: string
     github_url?: string
+    slug: string
     id: number
     image: string
     keywords?: string
@@ -83,7 +84,7 @@ const Index: React.FC<IProjectsIndex> = ({ projects }) => {
                             </RenderIf>
                             <Links>
                                 <big>
-                                    <Link className='inertia-link' href={route('projects.show', project.id)}>
+                                    <Link className='inertia-link' href={route('projects.show', project.slug)}>
                                         {project.title}
                                     </Link>
                                 </big>

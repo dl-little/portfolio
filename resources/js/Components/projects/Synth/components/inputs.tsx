@@ -1,5 +1,6 @@
-import { ChangeEventHandler, useContext, useEffect, useRef } from "react"
-import { SynthContext } from "./SynthContextProvider"
+import { ChangeEventHandler, useContext, useEffect, useRef } from "react";
+import { SynthContext } from "./SynthContextProvider";
+import styled from "styled-components";
 
 export interface IInput {
 	id: string
@@ -70,6 +71,10 @@ export const Select: React.FC<IInput> = (props) => {
 	)
 }
 
+const Vas = styled.canvas`
+	max-width: 100%;
+`;
+
 export const Canvas: React.FC<IInput> = (props) => {
 	const { id } = props;
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -88,6 +93,6 @@ export const Canvas: React.FC<IInput> = (props) => {
 	}, [canvasRef])
 
 	return (
-		<canvas ref={canvasRef} id={id} />
+		<Vas ref={canvasRef} id={id} />
 	)
 }

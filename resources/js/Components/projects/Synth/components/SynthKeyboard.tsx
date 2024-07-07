@@ -39,8 +39,18 @@ const Keyboard = styled.section`
 
 export const SynthKeyboard: React.FC = () => {
 	/* @ts-expect-error: TODO: Provide default in definition of context */
-	const { keyboardLetters, activeKeys } = useContext<{octave: "low" | "middle" | "high"}>(SynthContext);
+	const { keyboardLetters, activeKeys, setActiveKeys } = useContext<{octave: "low" | "middle" | "high"}>(SynthContext);
 	const triggers = Object.keys(triggerData);
+
+	const handleDown = (e: any) => {
+		/* @ts-expect-error: TODO: Provide default in definition of context */
+		setActiveKeys(activeKeys => [...activeKeys, e.target.dataset.trigger]);
+	}
+
+	const handleUp = (e: any) => {
+		/* @ts-expect-error: TODO: Provide default in definition of context */
+		setActiveKeys(activeKeys.filter(key => key !== e.target.dataset.trigger));
+	}
 
 	return (
 		<Keyboard>
@@ -65,6 +75,8 @@ export const SynthKeyboard: React.FC = () => {
 						keyboardLetters={keyboardLetters}
 						trigger={key}
 						active={activeKeys.includes(key)}
+						mouseDown={handleDown}
+						mouseUp={handleUp}
 					/>
 				)
 			})}

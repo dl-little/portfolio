@@ -164,6 +164,7 @@ export const SynthContextProvider = ({ children }: { children: React.ReactNode }
 			decay,
 			setDecay,
 			activeKeys,
+			setActiveKeys,
 			setCanvas
 		}} >
 			{children}
