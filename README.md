@@ -1,65 +1,41 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Hey, I'm Doug
+This portfolio is built with a Laravel back-end and a React/Typescript front-end. It uses Inertia.js via a Breeze starter kit. Each page of the portfolio has its own Controller class and corresponding React component. For instance, the Projects controller handles requests by returning Inertia responses, which render React components with project-specific data passed as props. Inertia.js client-side routing allows for a persistent layout without unnecessary re-rendering of static components.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The styling of the layout is preprocessed using Sass. I wanted to keep [global styles](resources/scss/) separate from those of smaller components, and I also wanted to write CSS for the global styles rather than css-in-js. Individual components are styled within their component files via Styled-Components. If a component needed access to a global style var, such as a color, media-query breakpoint, or a padding value, I exported the value in a Sass module ([example](resources/js/Components/FormGroup.tsx)). This allowed me to then use the variable in the Styled-Component declaration.
 
-## About Laravel
+## Notes About the Layout
+The frame around the content is comprised of absolutely positioned psuedo-elements. I wanted to create an effect where Y-overflowed content of the article element would appear to slip beneath the frame as a user scrolled down:
+<img src="demo/show-overflow.gif" alt="Gif showing the scrolled content beneath layout frame." />
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+To achieve this, I set the z-index of the pseudo-elements at the top and bottom of the frame higher than that of the article element, and I gave them a blurry backdrop filter. The body and main tags have a height of 100% with overflow: hidden, but the article has overflow-y: scroll, so when the content of the article element is taller than 100%, the main tag does not grow to accommodate it, but the content is scrollable.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Custom Hooks
+There are two custom React hooks at use throughout the portfolio:
+### [useScrollOffset](resources/js/Hooks/useScrollOffset.tsx)
+When content does overflow, the justify-content property on the article would position the content in the center of the page:
+<img src="demo/middle.png" alt="screenshot showing that the content is positioned in the middle of the page." />
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+To counter-act this, I needed to add an offset to the top and bottom of the article content. This would allow the page to load with the top of the content visible, and the bottom offset allows for the bottom of the content to sit above the bottom frame when fully scrolled.
 
-## Learning Laravel
+To achieve this, using React's [createContext](https://react.dev/reference/react/createContext), I created an article context provider that wraps the article element. In the Article component, I provided the context with the ref to the article tag. I could then access this ref and pass it to the hook from any component nestled within the article context provider. The hook returns a function that calculates the offset amount in pixels by comparing the article's offsetHeight and scrollHeight, and then applies a css variable to the style tag of the body element. The global styles of the layout make use of this variable to apply padding and margin to the necessary elements to achieve the desired effect:
+<img src="demo/top.png" alt="screenshot showing the correct positioning of the content." />
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+In a useLayoutEffect hook, an eventListener is created on the 'resize' event. I specifically used useLayoutEffect because of the render-blocking quality, as this can help to prevent cumulative layout shift when the offset amount changes on page load or refresh.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### [useDynamicImport](resources/js/Hooks/useDynamicImport.tsx)
+This hook imports and renders a React component based on the title passed to the hook. I wanted a way to host some projects as their own React components. When I create a Project resource on the admin side of the portfolio, if the created title matches a component within the Projects subdirectory, the component will be displayed on the project's 'Show' page.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Home Page
+[The home page](resources/js/Pages/Home.tsx) features a rotating marquee that shows different nouns for describing myself:
+<img src="demo/marquee.gif" />
 
-## Laravel Sponsors
+The list of nouns is dynamic, retrieved from settings on the back-end, and in order to transition the width between nouns of varying length, I needed to set the width with JS, since width: auto cannot be transitioned. The changing of the nouns happens based on an interval. The animation can be paused, which clears the interval:
+<img src="demo/pause.gif" />
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+When the interval is paused, the list of nouns can be scrolled:
+<img src="demo/scroll.gif" />
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+When the interval is running, the overflow is hidden, but when the interval is paused, the overflow is set to scroll. Snap points of 1em are applied to the content, as well as a snap-align property of start.
 
 ## License
 
