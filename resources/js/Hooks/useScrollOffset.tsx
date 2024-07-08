@@ -25,7 +25,7 @@ const useScrollOffset = (ref: MutableRefObject<HTMLElement | null>) => {
 		if (
 			articleScrollHeight <= articleOffsetHeight
 			// Below accounts for when the article is not taller than the viewport, but the frame overlaps the content.
-			&& ref.current.offsetParent.clientHeight - ref.current.firstElementChild.clientHeight > (gap * 4)
+			&& ref.current.offsetParent.clientHeight - ref.current.firstElementChild.clientHeight > (gap * 8)
 		) {
 			return 0;
 		}

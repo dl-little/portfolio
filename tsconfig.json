@@ -14,7 +14,8 @@
 			"ziggy-js": ["./vendor/tightenco/ziggy"]
 		},
 		"resolveJsonModule": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"allowImportingTsExtensions": true
 	},
 	"include": ["resources/js/**/*"]
 }

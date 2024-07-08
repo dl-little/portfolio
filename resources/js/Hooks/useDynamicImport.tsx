@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ImportError from "@/Components/projects/ImportError";
 
 const useDynamicImport = (title: string, props: any) => {
 	const [ importedComponent, setImportedComponent ] = useState(<></>);
@@ -7,10 +6,12 @@ const useDynamicImport = (title: string, props: any) => {
 	useEffect(() => {
 		const importComponent = async () => {
 			try {
-				const module = await import(`/resources/js/Components/projects/${title}.tsx`);
+				const module = await import(`../Components/projects/${title}.tsx`);
 				const AnotherComponent = module.default;
 				setImportedComponent(<AnotherComponent {...props} />);
 			} catch (e) {
+				const module = await import(`../Components/projects/ImportError.tsx`);
+				const ImportError = module.default;
 				setImportedComponent(<ImportError />);
 			}
 		};
