@@ -172,6 +172,7 @@ html, body, #app {
   align-items: flex-end;
   text-align: right;
   padding-top: var(--scroll-offset) !important;
+  box-sizing: content-box;
 }
 #app main article::-webkit-scrollbar { /* WebKit */
   width: 0;
