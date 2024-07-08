@@ -13,12 +13,12 @@ To achieve this, I set the z-index of the pseudo-elements at the top and bottom 
 There are two custom React hooks at use throughout the portfolio:
 ### [useScrollOffset](resources/js/Hooks/useScrollOffset.tsx)
 When content does overflow, the justify-content property on the article would position the content in the center of the page:
-<img src="demo/middle.png" alt="screenshot showing that the content is positioned in the middle of the page." />
+<img src="demo/middle.png" alt="screenshot showing that the content is positioned in the middle of the page." width="200px" />
 
 To counter-act this, I needed to add an offset to the top and bottom of the article content. This would allow the page to load with the top of the content visible, and the bottom offset allows for the bottom of the content to sit above the bottom frame when fully scrolled.
 
 To achieve this, using React's [createContext](https://react.dev/reference/react/createContext), I created an article context provider that wraps the article element. In the Article component, I provided the context with the ref to the article tag. I could then access this ref and pass it to the hook from any component nestled within the article context provider. The hook returns a function that calculates the offset amount in pixels by comparing the article's offsetHeight and scrollHeight, and then applies a css variable to the style tag of the body element. The global styles of the layout make use of this variable to apply padding and margin to the necessary elements to achieve the desired effect:
-<img src="demo/top.png" alt="screenshot showing the correct positioning of the content." />
+<img src="demo/top.png" alt="screenshot showing the correct positioning of the content." width="200px" />
 
 In a useLayoutEffect hook, an eventListener is created on the 'resize' event. I specifically used useLayoutEffect because of the render-blocking quality, as this can help to prevent cumulative layout shift when the offset amount changes on page load or refresh.
 
