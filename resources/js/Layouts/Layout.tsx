@@ -1,4 +1,3 @@
-import { Head } from '@inertiajs/react';
 import Header from '@/Components/Header';
 import Article from '@/Components/Article';
 import Footer from '@/Components/Footer';
@@ -18,11 +17,10 @@ const Layout: React.FC<ILayout> = ({ children, title }) => {
 	
 	return (
 		<>
-			<Head title={title} />
 			<Header />
 			<main id="main">
 				<ArticleContextProvider>
-					<Article children={children} />
+					<Article children={children} title={title} />
 				</ArticleContextProvider>
 			</main>
 			<Footer />
