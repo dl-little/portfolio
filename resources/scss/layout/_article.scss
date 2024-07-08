@@ -12,6 +12,7 @@ article {
 	align-items: flex-end;
 	text-align: right;
 	padding-top: var(--scroll-offset) !important;
+	box-sizing: content-box;
 
 	&::-webkit-scrollbar { /* WebKit */
 		width: 0;
