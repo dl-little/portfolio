@@ -11,6 +11,7 @@ To achieve this, I set the z-index of the pseudo-elements at the top and bottom 
 
 ## Custom Hooks
 There are two custom React hooks at use throughout the portfolio:
+
 ### [useScrollOffset](resources/js/Hooks/useScrollOffset.tsx)
 When content does overflow, the justify-content property on the article would position the content in the center of the page:
 
@@ -40,5 +41,4 @@ When the interval is paused, the list of nouns can be scrolled:
 When the interval is running, the overflow is hidden, but when the interval is paused, the overflow is set to scroll. Snap points of 1em are applied to the content, as well as a snap-align property of start.
 
 ## License
-
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
