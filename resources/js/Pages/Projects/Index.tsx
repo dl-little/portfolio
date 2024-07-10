@@ -6,7 +6,7 @@ import { ISharedProps } from '@/Components/interfaces';
 import RenderIf from '@/Components/RenderIf';
 
 import variables from '../../../scss/abstracts/_shared.module.scss';
-const { halfGap, gap, largeGap, contrast, secondary, tabletBreak, quarterGap } = variables;
+const { halfGap, gap, largeGap, contrast, secondary, tabletBreak, quarterGap, largeDesktopBreak } = variables;
 
 const IndexContainer = styled.section`
     & > *:not(:first-child) {
@@ -44,14 +44,24 @@ const ProjectCard = styled.li`
 
 const Keywords = styled.small`
     font-style: italic;
+    order: 2;
+    @media ( min-width: ${largeDesktopBreak} ) {
+        order: 1;
+    }
 `;
 
 const Links = styled.span`
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     align-items: flex-end;
     justify-content: flex-end;
     gap: ${halfGap};
+    order: 1;
+    flex-basis: 100%;
+    @media ( min-width: ${largeDesktopBreak} ) {
+        order: 2;
+        flex-basis: auto;
+    }
 `;
 export interface IProject {
     description?: string

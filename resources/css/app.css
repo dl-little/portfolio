@@ -190,7 +190,7 @@ html, body, #app {
 #app main article > *:not(:first-child):not(.screen-reader-text + *) {
   margin-block-start: 0.9rem;
 }
-@media (min-width: 421px) {
+@media (min-width: 426px) {
   #app::before {
     width: calc(100% - 1.65em);
     height: calc(100% - 1.65em + 0.3em);
@@ -264,7 +264,7 @@ big {
   font-size: 2em;
   color: #1F2933;
 }
-@media (min-width: 421px) {
+@media (min-width: 426px) {
   big {
     font-size: 2.79em;
   }
@@ -294,7 +294,7 @@ small {
   left: 20%;
   top: 90%;
 }
-@media (min-width: 421px) {
+@media (min-width: 426px) {
   .emphasis.highlight::after {
     width: 100%;
   }

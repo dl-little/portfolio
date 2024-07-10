@@ -1,6 +1,13 @@
+$large-desktop-break: 1280px;
 $desktop-break: 768px;
-$tablet-break: 421px;
+$tablet-break: 426px;
 $large-phone-break: 301px;
+
+@mixin large-desktop {
+  @media (min-width: #{$large-desktop-break}) {
+    @content;
+  }
+}
 
 @mixin desktop {
   @media (min-width: #{$desktop-break}) {
