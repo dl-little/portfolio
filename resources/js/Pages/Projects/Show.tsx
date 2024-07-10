@@ -38,6 +38,11 @@ const ProjectImage = styled.img`
     }
 `;
 
+const Description = styled.p`
+	white-space: pre-wrap;
+	text-align: left;
+`;
+
 interface IProjectsDetails extends ISharedProps {
 	project: IProject
 }
@@ -48,7 +53,9 @@ const Show: React.FC<IProjectsDetails> = ({ project }) => {
 	
     return (
 		<DetailsContainer>
-			<Heading>{title}</Heading>
+			<Heading>
+				{title}
+			</Heading>
 			<RenderIf isTrue={!!github_url}>
 				<a href={github_url} className="icon-link" title={`Github link for ${title}`}>
 					<GHLogo
@@ -65,7 +72,7 @@ const Show: React.FC<IProjectsDetails> = ({ project }) => {
 				<ProjectImage src={`/storage/${image}`} />
 			</RenderIf>
 			<RenderIf isTrue={!!description}>
-				<p>{description}</p>
+				<Description>{description}</Description>
 			</RenderIf>
 		</DetailsContainer>
     );
