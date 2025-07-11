@@ -57,19 +57,19 @@ const Contact: React.FC<IContact> = ({ values }) => {
                 <SettingCard>
                     <big>
                         <a className="inertia-link" href={github_url}>
-                            Github Url
+                            Github
                         </a>
                     </big>
                 </SettingCard>
                 <SettingCard>
                     <big>
                         <a className="inertia-link" href={linkedin_url}>
-                            LinkedIn Url
+                            LinkedIn
                         </a>
                     </big>
                 </SettingCard>
                 <SettingCard>
-                    <big>Email: contact@dougllittle.com</big>
+                    <big>contact@dougllittle.com</big>
                 </SettingCard>
             </SettingCards>
         </ContactContainer>
