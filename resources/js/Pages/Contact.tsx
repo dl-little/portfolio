@@ -69,11 +69,7 @@ const Contact: React.FC<IContact> = ({ values }) => {
                     </big>
                 </SettingCard>
                 <SettingCard>
-                    <big>
-                        <a className="inertia-link" href={`mailto:${email}`}>
-                            Email
-                        </a>
-                    </big>
+                    <big>Email: contact@dougllittle.com</big>
                 </SettingCard>
             </SettingCards>
         </ContactContainer>
