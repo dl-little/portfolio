@@ -1,16 +1,16 @@
 import Heading from "@/Components/Heading";
 import styled from "styled-components";
-import { Link } from "@inertiajs/react";
 
-import variables from '../../scss/abstracts/_shared.module.scss';
-const { halfGap, gap, largeGap, contrast, secondary, tabletBreak, quarterGap } = variables;
+import variables from "../../scss/abstracts/_shared.module.scss";
+const { halfGap, gap, largeGap, contrast, secondary, tabletBreak, quarterGap } =
+    variables;
 
 interface IContact {
-	values: {
-		github_url: string
-		linkedin_url: string
-		email: string
-	}
+    values: {
+        github_url: string;
+        linkedin_url: string;
+        email: string;
+    };
 }
 
 const ContactContainer = styled.section`
@@ -26,58 +26,58 @@ const SettingCards = styled.ul`
 
     & > *:not(:first-child) {
         margin-block-start: ${largeGap};
-        @media( min-width: ${tabletBreak} ) {
+        @media (min-width: ${tabletBreak}) {
             margin-block-start: ${gap};
         }
     }
 `;
 
 const SettingCard = styled.li`
-	display: flex;
-	flex-flow: row wrap;
-	align-items: flex-end;
-	justify-content: flex-end;
-	gap: ${quarterGap};
-	@media( min-width: ${tabletBreak} ) {
-		gap: ${halfGap};
-	}
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: ${quarterGap};
+    @media (min-width: ${tabletBreak}) {
+        gap: ${halfGap};
+    }
 
-	& big {
-		color: ${contrast};
-	}
+    & big {
+        color: ${contrast};
+    }
 `;
 
 const Contact: React.FC<IContact> = ({ values }) => {
-	const { github_url, linkedin_url, email } = values;
+    const { github_url, linkedin_url, email } = values;
 
-	return (
-		<ContactContainer>
-			<Heading>Contact</Heading>
-			<SettingCards>
-				<SettingCard>
-					<big>
-						<Link className='inertia-link' href={github_url}>
-							Github Url
-						</Link>
-					</big>
-				</SettingCard>
-				<SettingCard>
-					<big>
-						<Link className='inertia-link' href={linkedin_url}>
-							LinkedIn Url
-						</Link>
-					</big>
-				</SettingCard>
-				<SettingCard>
-					<big>
-						<a className='inertia-link' href={`mailto:${email}`}>
-							Email
-						</a>
-					</big>
-				</SettingCard>
-			</SettingCards>
-		</ContactContainer>
-	);
-}
+    return (
+        <ContactContainer>
+            <Heading>Contact</Heading>
+            <SettingCards>
+                <SettingCard>
+                    <big>
+                        <a className="inertia-link" href={github_url}>
+                            Github Url
+                        </a>
+                    </big>
+                </SettingCard>
+                <SettingCard>
+                    <big>
+                        <a className="inertia-link" href={linkedin_url}>
+                            LinkedIn Url
+                        </a>
+                    </big>
+                </SettingCard>
+                <SettingCard>
+                    <big>
+                        <a className="inertia-link" href={`mailto:${email}`}>
+                            Email
+                        </a>
+                    </big>
+                </SettingCard>
+            </SettingCards>
+        </ContactContainer>
+    );
+};
 
 export default Contact;
